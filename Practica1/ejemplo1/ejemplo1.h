@@ -23,7 +23,7 @@ class ejemplo1 : public QWidget, public Ui_Counter
 
     private:
         int cont = 0;
-        bool activado = false;
+        bool activado = true;
 };
 
 #endif // ejemplo1_H

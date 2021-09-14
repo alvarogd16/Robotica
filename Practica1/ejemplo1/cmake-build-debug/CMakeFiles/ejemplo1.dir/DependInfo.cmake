@@ -1,12 +1,16 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/alvaro/Documents/Robotica/ejemplo1/ejemplo1.cpp" "/home/alvaro/Documents/Robotica/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o"
-  "/home/alvaro/Documents/Robotica/ejemplo1/main.cpp" "/home/alvaro/Documents/Robotica/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/main.cpp.o"
-  "/home/alvaro/Documents/Robotica/ejemplo1/cmake-build-debug/moc_ejemplo1.cpp" "/home/alvaro/Documents/Robotica/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o"
+  "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/ejemplo1.cpp" "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o"
+  "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/main.cpp" "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/main.cpp.o"
+  "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/cmake-build-debug/moc_ejemplo1.cpp" "/home/alvaro/Documents/Robotica/Practica1/ejemplo1/cmake-build-debug/CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -35,6 +39,10 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/x86_64-linux-gnu/qt5/QtXml"
   "/usr/include/x86_64-linux-gnu/qt5/QtXmlPatterns"
   "/usr/include/x86_64-linux-gnu/qt5/QtNetwork"
+  )
+
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
   )
 
 # Targets to which this target links.

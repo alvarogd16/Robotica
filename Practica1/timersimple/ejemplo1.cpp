@@ -30,7 +30,11 @@ void ejemplo1::cuenta()
     lcdNumber->display(++cont);
 	trick++;
 
-    if(cont == 10)
+    if(cont == 10) {
+        std::cout << "Elapsed time " << mytimer.getElapsedTime() << std::endl;
+        std::cout << "Period before " << mytimer.getPeriod() << std::endl;
         mytimer.setPeriod(100);
+        std::cout << "Period after " << mytimer.getPeriod() << std::endl;
+    }
 }
 

@@ -6,21 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/alvaro/Documents/Robotica/timersimple/ejemplo1.cpp
-ejemplo1.h
-/home/alvaro/Documents/Robotica/timersimple/ejemplo1.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/moc_ejemplo1.cpp
+../ejemplo1.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.h
+QtCore/qbytearray.h
+-
+QtCore/qmetatype.h
+-
 
-/home/alvaro/Documents/Robotica/timersimple/ejemplo1.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.cpp
+ejemplo1.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.h
+
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.h
 QtGui
 -
 ui_counterDlg.h
-/home/alvaro/Documents/Robotica/timersimple/ui_counterDlg.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ui_counterDlg.h
 chrono
 -
 timer.h
-/home/alvaro/Documents/Robotica/timersimple/timer.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/timer.h
 
-/home/alvaro/Documents/Robotica/timersimple/timer.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/main.cpp
+QApplication
+-
+ejemplo1.h
+/home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.h
+
+/home/alvaro/Documents/Robotica/Practica1/timersimple/timer.h
 thread
 -
 chrono

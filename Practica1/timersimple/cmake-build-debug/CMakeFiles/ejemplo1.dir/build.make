@@ -53,10 +53,10 @@ RM = /snap/clion/163/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alvaro/Documents/Robotica/timersimple
+CMAKE_SOURCE_DIR = /home/alvaro/Documents/Robotica/Practica1/timersimple
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug
+CMAKE_BINARY_DIR = /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ejemplo1.dir/depend.make
@@ -67,51 +67,51 @@ include CMakeFiles/ejemplo1.dir/progress.make
 include CMakeFiles/ejemplo1.dir/flags.make
 
 moc_ejemplo1.cpp: ../ejemplo1.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating moc_ejemplo1.cpp"
-	/usr/lib/qt5/bin/moc @/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/moc_ejemplo1.cpp_parameters
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating moc_ejemplo1.cpp"
+	/usr/lib/qt5/bin/moc @/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/moc_ejemplo1.cpp_parameters
 
 ui_counterDlg.h: ../counterDlg.ui
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ui_counterDlg.h"
-	/usr/lib/qt5/bin/uic -o /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/ui_counterDlg.h /home/alvaro/Documents/Robotica/timersimple/counterDlg.ui
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ui_counterDlg.h"
+	/usr/lib/qt5/bin/uic -o /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/ui_counterDlg.h /home/alvaro/Documents/Robotica/Practica1/timersimple/counterDlg.ui
 
 CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o: CMakeFiles/ejemplo1.dir/flags.make
 CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o: ../ejemplo1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o -c /home/alvaro/Documents/Robotica/timersimple/ejemplo1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o"
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/ejemplo1.cpp.o -c /home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.cpp
 
 CMakeFiles/ejemplo1.dir/ejemplo1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ejemplo1.dir/ejemplo1.cpp.i"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/timersimple/ejemplo1.cpp > CMakeFiles/ejemplo1.dir/ejemplo1.cpp.i
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.cpp > CMakeFiles/ejemplo1.dir/ejemplo1.cpp.i
 
 CMakeFiles/ejemplo1.dir/ejemplo1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ejemplo1.dir/ejemplo1.cpp.s"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/timersimple/ejemplo1.cpp -o CMakeFiles/ejemplo1.dir/ejemplo1.cpp.s
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/Practica1/timersimple/ejemplo1.cpp -o CMakeFiles/ejemplo1.dir/ejemplo1.cpp.s
 
 CMakeFiles/ejemplo1.dir/main.cpp.o: CMakeFiles/ejemplo1.dir/flags.make
 CMakeFiles/ejemplo1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ejemplo1.dir/main.cpp.o"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/main.cpp.o -c /home/alvaro/Documents/Robotica/timersimple/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ejemplo1.dir/main.cpp.o"
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/main.cpp.o -c /home/alvaro/Documents/Robotica/Practica1/timersimple/main.cpp
 
 CMakeFiles/ejemplo1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ejemplo1.dir/main.cpp.i"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/timersimple/main.cpp > CMakeFiles/ejemplo1.dir/main.cpp.i
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/Practica1/timersimple/main.cpp > CMakeFiles/ejemplo1.dir/main.cpp.i
 
 CMakeFiles/ejemplo1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ejemplo1.dir/main.cpp.s"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/timersimple/main.cpp -o CMakeFiles/ejemplo1.dir/main.cpp.s
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/Practica1/timersimple/main.cpp -o CMakeFiles/ejemplo1.dir/main.cpp.s
 
 CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o: CMakeFiles/ejemplo1.dir/flags.make
 CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o: moc_ejemplo1.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o -c /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/moc_ejemplo1.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o"
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.o -c /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/moc_ejemplo1.cpp
 
 CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.i"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/moc_ejemplo1.cpp > CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.i
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/moc_ejemplo1.cpp > CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.i
 
 CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.s"
-	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/moc_ejemplo1.cpp -o CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.s
+	/bin/g++-10 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/moc_ejemplo1.cpp -o CMakeFiles/ejemplo1.dir/moc_ejemplo1.cpp.s
 
 # Object files for target ejemplo1
 ejemplo1_OBJECTS = \
@@ -135,7 +135,7 @@ ejemplo1: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.12.8
 ejemplo1: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.12.8
 ejemplo1: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.12.8
 ejemplo1: CMakeFiles/ejemplo1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ejemplo1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ejemplo1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ejemplo1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -148,6 +148,6 @@ CMakeFiles/ejemplo1.dir/clean:
 
 CMakeFiles/ejemplo1.dir/depend: moc_ejemplo1.cpp
 CMakeFiles/ejemplo1.dir/depend: ui_counterDlg.h
-	cd /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/alvaro/Documents/Robotica/timersimple /home/alvaro/Documents/Robotica/timersimple /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug /home/alvaro/Documents/Robotica/timersimple/cmake-build-debug/CMakeFiles/ejemplo1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/alvaro/Documents/Robotica/Practica1/timersimple /home/alvaro/Documents/Robotica/Practica1/timersimple /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug /home/alvaro/Documents/Robotica/Practica1/timersimple/cmake-build-debug/CMakeFiles/ejemplo1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ejemplo1.dir/depend
 
