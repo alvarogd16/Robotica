@@ -27,13 +27,14 @@
 #include <DifferentialRobot.h>
 #include <GenericBase.h>
 #include <Laser.h>
+#include <LaserPub.h>
 
 
 #define CHECK_PERIOD 5000
 #define BASIC_PERIOD 100
 
 
-using TuplePrx = std::tuple<RoboCompDifferentialRobot::DifferentialRobotPrxPtr,RoboCompLaser::LaserPrxPtr>;
+using TuplePrx = std::tuple<RoboCompDifferentialRobot::DifferentialRobotPrxPtr>;
 
 
 class GenericWorker : public QObject
@@ -50,8 +51,8 @@ public:
 
 
 	RoboCompDifferentialRobot::DifferentialRobotPrxPtr differentialrobot_proxy;
-	RoboCompLaser::LaserPrxPtr laser_proxy;
 
+	virtual void LaserPub_pushLaserData (RoboCompLaser::TLaserData laserData) = 0;
 
 protected:
 

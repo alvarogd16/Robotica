@@ -81,8 +81,10 @@
 #include "specificmonitor.h"
 #include "commonbehaviorI.h"
 
+#include <laserpubI.h>
 
 #include <GenericBase.h>
+#include <Laser.h>
 
 
 
@@ -131,7 +133,6 @@ int ::chocachoca::run(int argc, char* argv[])
 	int status=EXIT_SUCCESS;
 
 	RoboCompDifferentialRobot::DifferentialRobotPrxPtr differentialrobot_proxy;
-	RoboCompLaser::LaserPrxPtr laser_proxy;
 
 	string proxy, tmp;
 	initialize();
@@ -152,23 +153,24 @@ int ::chocachoca::run(int argc, char* argv[])
 	rInfo("DifferentialRobotProxy initialized Ok!");
 
 
+	IceStorm::TopicManagerPrxPtr topicManager;
 	try
 	{
-		if (not GenericMonitor::configGetString(communicator(), prefix, "LaserProxy", proxy, ""))
+		topicManager = topicManager = Ice::checkedCast<IceStorm::TopicManagerPrx>(communicator()->propertyToProxy("TopicManager.Proxy"));
+		if (!topicManager)
 		{
-			cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy LaserProxy\n";
+		    cout << "[" << PROGRAM_NAME << "]: TopicManager.Proxy not defined in config file."<<endl;
+		    cout << "	 Config line example: TopicManager.Proxy=IceStorm/TopicManager:default -p 9999"<<endl;
+	        return EXIT_FAILURE;
 		}
-		laser_proxy = Ice::uncheckedCast<RoboCompLaser::LaserPrx>( communicator()->stringToProxy( proxy ) );
 	}
-	catch(const Ice::Exception& ex)
+	catch (const Ice::Exception &ex)
 	{
-		cout << "[" << PROGRAM_NAME << "]: Exception creating proxy Laser: " << ex;
+		cout << "[" << PROGRAM_NAME << "]: Exception: 'rcnode' not running: " << ex << endl;
 		return EXIT_FAILURE;
 	}
-	rInfo("LaserProxy initialized Ok!");
 
-
-	tprx = std::make_tuple(differentialrobot_proxy,laser_proxy);
+	tprx = std::make_tuple(differentialrobot_proxy);
 	SpecificWorker *worker = new SpecificWorker(tprx, startup_check_flag);
 	//Monitor thread
 	SpecificMonitor *monitor = new SpecificMonitor(worker,communicator());
@@ -208,6 +210,53 @@ int ::chocachoca::run(int argc, char* argv[])
 
 
 		// Server adapter creation and publication
+		std::shared_ptr<IceStorm::TopicPrx> laserpub_topic;
+		Ice::ObjectPrxPtr laserpub;
+		try
+		{
+			if (not GenericMonitor::configGetString(communicator(), prefix, "LaserPubTopic.Endpoints", tmp, ""))
+			{
+				cout << "[" << PROGRAM_NAME << "]: Can't read configuration for proxy LaserPubProxy";
+			}
+			Ice::ObjectAdapterPtr LaserPub_adapter = communicator()->createObjectAdapterWithEndpoints("laserpub", tmp);
+			RoboCompLaserPub::LaserPubPtr laserpubI_ =  std::make_shared <LaserPubI>(worker);
+			auto laserpub = LaserPub_adapter->addWithUUID(laserpubI_)->ice_oneway();
+			if(!laserpub_topic)
+			{
+				try {
+					laserpub_topic = topicManager->create("LaserPub");
+				}
+				catch (const IceStorm::TopicExists&) {
+					//Another client created the topic
+					try{
+						cout << "[" << PROGRAM_NAME << "]: Probably other client already opened the topic. Trying to connect.\n";
+						laserpub_topic = topicManager->retrieve("LaserPub");
+					}
+					catch(const IceStorm::NoSuchTopic&)
+					{
+						cout << "[" << PROGRAM_NAME << "]: Topic doesn't exists and couldn't be created.\n";
+						//Error. Topic does not exist
+					}
+				}
+				catch(const IceUtil::NullHandleException&)
+				{
+					cout << "[" << PROGRAM_NAME << "]: ERROR TopicManager is Null. Check that your configuration file contains an entry like:\n"<<
+					"\t\tTopicManager.Proxy=IceStorm/TopicManager:default -p <port>\n";
+					return EXIT_FAILURE;
+				}
+				IceStorm::QoS qos;
+				laserpub_topic->subscribeAndGetPublisher(qos, laserpub);
+			}
+			LaserPub_adapter->activate();
+		}
+		catch(const IceStorm::NoSuchTopic&)
+		{
+			cout << "[" << PROGRAM_NAME << "]: Error creating LaserPub topic.\n";
+			//Error. Topic does not exist
+		}
+
+
+		// Server adapter creation and publication
 		cout << SERVER_FULL_NAME " started" << endl;
 
 		// User defined QtGui elements ( main window, dialogs, etc )
@@ -218,6 +267,16 @@ int ::chocachoca::run(int argc, char* argv[])
 		#endif
 		// Run QT Application Event Loop
 		a.exec();
+
+		try
+		{
+			std::cout << "Unsubscribing topic: laserpub " <<std::endl;
+			laserpub_topic->unsubscribe( laserpub );
+		}
+		catch(const Ice::Exception& ex)
+		{
+			std::cout << "ERROR Unsubscribing topic: laserpub " << ex.what()<<std::endl;
+		}
 
 
 		status = EXIT_SUCCESS;

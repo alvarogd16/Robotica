@@ -36,21 +36,6 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-//	THE FOLLOWING IS JUST AN EXAMPLE
-//	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
-//	try
-//	{
-//		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
-//		std::string innermodel_path = par.value;
-//		innerModel = std::make_shared(innermodel_path);
-//	}
-//	catch(const std::exception &e) { qFatal("Error reading config params"); }
-
-
-
-
-
-
 	return true;
 }
 
@@ -71,20 +56,16 @@ void SpecificWorker::initialize(int period)
 
 void SpecificWorker::compute()
 {
-	//computeCODE
-	//QMutexLocker locker(mutex);
-	//try
-	//{
-	//  camera_proxy->getYImage(0,img, cState, bState);
-	//  memcpy(image_gray.data, &img[0], m_width*m_height*sizeof(uchar));
-	//  searchTags(image_gray);
-	//}
-	//catch(const Ice::Exception &e)
-	//{
-	//  std::cout << "Error reading from Camera" << e << std::endl;
-	//}
-	
-	
+    if(auto ldata = laser_buffer.try_get(); ldata.has_value() )
+    {
+        qInfo() << ldata.value().size();
+    }
+
+    //try
+    //{
+    //    differentialrobot_proxy->setSpeedBase( adv, rot);
+    //}
+    //catch (){}
 }
 
 int SpecificWorker::startup_check()
@@ -94,7 +75,14 @@ int SpecificWorker::startup_check()
 	return 0;
 }
 
+////////////////////////////////////////////////////////////////
 
+//SUBSCRIPTION to pushLaserData method from LaserPub interface
+void SpecificWorker::LaserPub_pushLaserData(RoboCompLaser::TLaserData laserData)
+{
+    laser_buffer.put(std::move(laserData));
+    //qInfo() << "hola " << laserData.size();
+}
 
 
 /**************************************/

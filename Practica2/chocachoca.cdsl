@@ -1,11 +1,12 @@
 import "DifferentialRobot.idsl";
-import "Laser.idsl";
+import "LaserPub.idsl";
 
 Component chocachoca
 {
     Communications
     {
-        requires Laser, DifferentialRobot;
+        requires DifferentialRobot;
+        subscribesTo LaserPub;
     };
     language Cpp11;
 };

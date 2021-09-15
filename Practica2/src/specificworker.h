@@ -28,7 +28,7 @@
 #define SPECIFICWORKER_H
 
 #include <genericworker.h>
-#include <innermodel/innermodel.h>
+#include <doublebuffer/DoubleBuffer.h>
 
 class SpecificWorker : public GenericWorker
 {
@@ -38,15 +38,16 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 
-
+    void LaserPub_pushLaserData(RoboCompLaser::TLaserData laserData);
 
 public slots:
 	void compute();
 	int startup_check();
 	void initialize(int period);
+
 private:
-	std::shared_ptr < InnerModel > innerModel;
 	bool startup_check_flag;
+    DoubleBuffer<RoboCompLaser::TLaserData, RoboCompLaser::TLaserData> laser_buffer;
 
 };
 
