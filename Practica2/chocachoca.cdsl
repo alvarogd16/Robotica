@@ -1,0 +1,12 @@
+import "DifferentialRobot.idsl";
+import "Laser.idsl";
+
+Component chocachoca
+{
+    Communications
+    {
+        requires Laser, DifferentialRobot;
+    };
+    language Cpp11;
+};
+
