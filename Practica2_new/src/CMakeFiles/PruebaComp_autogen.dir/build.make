@@ -53,10 +53,10 @@ RM = /snap/clion/164/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alvaro/Documents/Robotica/Practica2_new
+CMAKE_SOURCE_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alvaro/Documents/Robotica/Practica2_new
+CMAKE_BINARY_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 # Utility rule file for PruebaComp_autogen.
 
@@ -67,8 +67,8 @@ include src/CMakeFiles/PruebaComp_autogen.dir/compiler_depend.make
 include src/CMakeFiles/PruebaComp_autogen.dir/progress.make
 
 src/CMakeFiles/PruebaComp_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alvaro/Documents/Robotica/Practica2_new/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target PruebaComp"
-	cd /home/alvaro/Documents/Robotica/Practica2_new/src && /snap/clion/164/bin/cmake/linux/bin/cmake -E cmake_autogen /home/alvaro/Documents/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/AutogenInfo.json ""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target PruebaComp"
+	cd /home/alumno/G5-X1/Robotica/Practica2_new/src && /snap/clion/164/bin/cmake/linux/bin/cmake -E cmake_autogen /home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/AutogenInfo.json Debug
 
 PruebaComp_autogen: src/CMakeFiles/PruebaComp_autogen
 PruebaComp_autogen: src/CMakeFiles/PruebaComp_autogen.dir/build.make
@@ -79,10 +79,10 @@ src/CMakeFiles/PruebaComp_autogen.dir/build: PruebaComp_autogen
 .PHONY : src/CMakeFiles/PruebaComp_autogen.dir/build
 
 src/CMakeFiles/PruebaComp_autogen.dir/clean:
-	cd /home/alvaro/Documents/Robotica/Practica2_new/src && $(CMAKE_COMMAND) -P CMakeFiles/PruebaComp_autogen.dir/cmake_clean.cmake
+	cd /home/alumno/G5-X1/Robotica/Practica2_new/src && $(CMAKE_COMMAND) -P CMakeFiles/PruebaComp_autogen.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/PruebaComp_autogen.dir/clean
 
 src/CMakeFiles/PruebaComp_autogen.dir/depend:
-	cd /home/alvaro/Documents/Robotica/Practica2_new && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/alvaro/Documents/Robotica/Practica2_new /home/alvaro/Documents/Robotica/Practica2_new/src /home/alvaro/Documents/Robotica/Practica2_new /home/alvaro/Documents/Robotica/Practica2_new/src /home/alvaro/Documents/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/alumno/G5-X1/Robotica/Practica2_new && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/alumno/G5-X1/Robotica/Practica2_new /home/alumno/G5-X1/Robotica/Practica2_new/src /home/alumno/G5-X1/Robotica/Practica2_new /home/alumno/G5-X1/Robotica/Practica2_new/src /home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/PruebaComp_autogen.dir/depend
 

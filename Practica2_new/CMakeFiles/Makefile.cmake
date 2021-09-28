@@ -30,7 +30,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeDetermineCompilerABI.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeDetermineCompilerId.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeDetermineSystem.cmake"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeFindBinUtils.cmake"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeFindCodeBlocks.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeGenericSystem.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeInitializeConfigs.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeLanguageInformation.cmake"
@@ -44,7 +46,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeTestCCompiler.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeTestCXXCompiler.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeTestCompilerCommon.cmake"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeUnixFindMake.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckCSourceCompiles.cmake"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckFunctionExists.c"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.c.in"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckLibraryExists.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/Compiler/ADSP-DetermineCompiler.cmake"
@@ -109,6 +114,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/Platform/Linux-GNU.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/Platform/Linux.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/Platform/UnixPaths.cmake"
+  "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/ProcessorCount.cmake"
   "/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/SelectLibraryConfigurations.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5Config.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake"
@@ -184,7 +190,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Practica2_new_src.dir/DependInfo.cmake"
+  "src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/DependInfo.cmake"
   "src/CMakeFiles/PruebaComp.dir/DependInfo.cmake"
   "src/CMakeFiles/PruebaComp_autogen.dir/DependInfo.cmake"
   )

@@ -57,10 +57,10 @@ RM = /snap/clion/164/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alvaro/Documents/Robotica/Practica2_new
+CMAKE_SOURCE_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alvaro/Documents/Robotica/Practica2_new
+CMAKE_BINARY_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Practica2_new/CMakeFiles /home/alvaro/Documents/Robotica/Practica2_new//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles /home/alumno/G5-X1/Robotica/Practica2_new//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Practica2_new/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ICES__home_alvaro_Documents_Robotica_Practica2_new_src
+# Target rules for targets named ICES__home_alumno_G5-X1_Robotica_Practica2_new_src
 
 # Build rule for target.
-ICES__home_alvaro_Documents_Robotica_Practica2_new_src: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ICES__home_alvaro_Documents_Robotica_Practica2_new_src
-.PHONY : ICES__home_alvaro_Documents_Robotica_Practica2_new_src
+ICES__home_alumno_G5-X1_Robotica_Practica2_new_src: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ICES__home_alumno_G5-X1_Robotica_Practica2_new_src
+.PHONY : ICES__home_alumno_G5-X1_Robotica_Practica2_new_src
 
 # fast build rule for target.
-ICES__home_alvaro_Documents_Robotica_Practica2_new_src/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Practica2_new_src.dir/build
-.PHONY : ICES__home_alvaro_Documents_Robotica_Practica2_new_src/fast
+ICES__home_alumno_G5-X1_Robotica_Practica2_new_src/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build
+.PHONY : ICES__home_alumno_G5-X1_Robotica_Practica2_new_src/fast
 
 #=============================================================================
 # Target rules for targets named PruebaComp
@@ -212,7 +212,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... ICES__home_alvaro_Documents_Robotica_Practica2_new_src"
+	@echo "... ICES__home_alumno_G5-X1_Robotica_Practica2_new_src"
 	@echo "... PruebaComp_autogen"
 	@echo "... PruebaComp"
 .PHONY : help

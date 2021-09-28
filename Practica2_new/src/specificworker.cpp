@@ -72,8 +72,12 @@ void SpecificWorker::initialize(int period)
 void SpecificWorker::compute()
 {
 	try {
+        auto ldata = laser_proxy->getLaserData();
+        std::cout << ldata.front().dist << std::endl;
 
-    } catch()
+        differentialrobot_proxy->setSpeedBase(100, 1.5);
+    }
+    catch(const Ice::Exception &e) { std::cout << e << std::endl; }
 }
 
 int SpecificWorker::startup_check()

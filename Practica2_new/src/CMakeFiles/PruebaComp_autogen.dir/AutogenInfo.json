@@ -1,12 +1,12 @@
 {
-	"BUILD_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new/src/PruebaComp_autogen",
-	"CMAKE_BINARY_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new/src",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new/src",
+	"BUILD_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/PruebaComp_autogen",
+	"CMAKE_BINARY_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new/src",
 	"CMAKE_EXECUTABLE" : "/snap/clion/164/bin/cmake/linux/bin/cmake",
 	"CMAKE_LIST_FILES" : 
 	[
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/CMakeLists.txt",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeLists.txt",
 		"/opt/robocomp/cmake/robocomp.cmake",
 		"/opt/robocomp/cmake/modules/qt.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake",
@@ -68,7 +68,7 @@
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QConnmanEnginePlugin.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QNetworkManagerEnginePlugin.cmake",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/CMakeListsSpecific.txt",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeListsSpecific.txt",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindIce.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/SelectLibraryConfigurations.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/SelectLibraryConfigurations.cmake",
@@ -79,6 +79,9 @@
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckCSourceCompiles.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/Internal/CheckSourceCompiles.cmake",
+		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.c.in",
+		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckFunctionExists.c",
+		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CheckFunctionExists.c",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageMessage.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindIce.cmake",
@@ -88,37 +91,37 @@
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageMessage.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new",
+	"CMAKE_SOURCE_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
 	"HEADERS" : 
 	[
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/commonbehaviorI.h",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/commonbehaviorI.h",
 			"MU",
 			"EWIEGA46WW/moc_commonbehaviorI.cpp",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/genericmonitor.h",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/genericmonitor.h",
 			"MU",
 			"EWIEGA46WW/moc_genericmonitor.cpp",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/genericworker.h",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/genericworker.h",
 			"MU",
 			"EWIEGA46WW/moc_genericworker.cpp",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/specificmonitor.h",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/specificmonitor.h",
 			"MU",
 			"EWIEGA46WW/moc_specificmonitor.cpp",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/specificworker.h",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/specificworker.h",
 			"MU",
 			"EWIEGA46WW/moc_specificworker.cpp",
 			null
@@ -143,15 +146,14 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/alvaro/Documents/Robotica/Practica2_new/src/PruebaComp_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/alvaro/Documents/Robotica/Practica2_new/src/PruebaComp_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/PruebaComp_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/PruebaComp_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"ICE_CPP11_MAPPING",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NETWORK_LIB",
-		"QT_NO_DEBUG",
 		"QT_OPENGL_LIB",
 		"QT_SQL_LIB",
 		"QT_WIDGETS_LIB",
@@ -167,11 +169,11 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/home/alvaro/Documents/Robotica/Practica2_new/src",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src",
 		"/opt/robocomp/include",
 		"/classes",
-		"/home/alvaro/Documents/Robotica/Practica2_new",
+		"/home/alumno/G5-X1/Robotica/Practica2_new",
 		"/opt/robocomp/classes",
 		"/opt/robocomp/libs",
 		"/opt/robocomp/interfaces",
@@ -199,58 +201,54 @@
 	"MOC_PATH_PREFIX" : false,
 	"MOC_PREDEFS_CMD" : 
 	[
-		"/bin/g++-10",
+		"/usr/bin/c++",
 		"-dM",
 		"-E",
 		"-c",
 		"/snap/clion/164/bin/cmake/linux/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/alvaro/Documents/Robotica/Practica2_new/src/PruebaComp_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/PruebaComp_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/CommonBehavior.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/DifferentialRobot.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/GenericBase.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/Laser.cpp"
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/CommonBehavior.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/DifferentialRobot.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/GenericBase.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/Laser.cpp"
 	],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 4,
-	"PARSE_CACHE_FILE" : "/home/alvaro/Documents/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/ParseCache.txt",
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 12,
-	"SETTINGS_FILE" : "/home/alvaro/Documents/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/alumno/G5-X1/Robotica/Practica2_new/src/CMakeFiles/PruebaComp_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/commonbehaviorI.cpp",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/commonbehaviorI.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/genericmonitor.cpp",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/genericmonitor.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/genericworker.cpp",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/genericworker.cpp",
+			"MU",
+			null
+		],
+		[ "/home/alumno/G5-X1/Robotica/Practica2_new/src/main.cpp", "MU", null ],
+		[
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/specificmonitor.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/main.cpp",
-			"MU",
-			null
-		],
-		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/specificmonitor.cpp",
-			"MU",
-			null
-		],
-		[
-			"/home/alvaro/Documents/Robotica/Practica2_new/src/specificworker.cpp",
+			"/home/alumno/G5-X1/Robotica/Practica2_new/src/specificworker.cpp",
 			"MU",
 			null
 		],
@@ -262,10 +260,10 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/CommonBehavior.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/DifferentialRobot.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/GenericBase.cpp",
-		"/home/alvaro/Documents/Robotica/Practica2_new/src/Laser.cpp"
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/CommonBehavior.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/DifferentialRobot.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/GenericBase.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica2_new/src/Laser.cpp"
 	],
 	"UIC_UI_FILES" : [],
 	"VERBOSITY" : 0
