@@ -66,16 +66,43 @@ void SpecificWorker::initialize(int period)
 	{
 		timer.start(Period);
 	}
-
+    robotMove.adv = 500;
+    robotMove.rot = 1.5;
 }
 
 void SpecificWorker::compute()
 {
 	try {
         auto ldata = laser_proxy->getLaserData();
-        std::cout << ldata.front().dist << std::endl;
+        std::sort(ldata.begin()+5, ldata.end()-5, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 
-        differentialrobot_proxy->setSpeedBase(100, 1.5);
+        /*
+        float minDist = ldata[5].dist;
+        std::cout << "Min dist: " << minDist << std::endl;
+        const float minTope = 500;
+        float rot = 0;
+        if(minDist > minTope) {
+            differentialrobot_proxy->setSpeedBase(600, 0);
+        } else{
+            differentialrobot_proxy->setSpeedBase(10, 1);
+        }*/
+
+        std::cout << "Rot: " << robotMove.rot << std::endl;
+
+        switch (moveState) {
+            case ADVANCE:
+                break;
+            case SPIRAL:
+                differentialrobot_proxy->setSpeedBase(robotMove.adv, robotMove.rot);
+                if(robotMove.rot < 0.5) robotMove.rot -= 0.0005;
+                else robotMove.rot -= 0.002;
+
+                break;
+            case OBSTACLE:
+                break;
+        }
+
+
     }
     catch(const Ice::Exception &e) { std::cout << e << std::endl; }
 }

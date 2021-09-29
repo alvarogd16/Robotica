@@ -48,6 +48,12 @@ private:
 	std::shared_ptr < InnerModel > innerModel;
 	bool startup_check_flag;
 
+    enum MoveStates_t {ADVANCE, SPIRAL, OBSTACLE};
+    MoveStates_t moveState = SPIRAL;
+    struct RobotMovement_t {
+        float adv = 0;
+        float rot = 0;
+    } robotMove;
 };
 
 #endif
