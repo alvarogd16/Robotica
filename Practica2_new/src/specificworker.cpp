@@ -66,45 +66,100 @@ void SpecificWorker::initialize(int period)
 	{
 		timer.start(Period);
 	}
-    robotMove.adv = 500;
-    robotMove.rot = 1.5;
+
+
+    changeState(ADVANCE);
 }
 
 void SpecificWorker::compute()
 {
 	try {
         auto ldata = laser_proxy->getLaserData();
-        std::sort(ldata.begin()+5, ldata.end()-5, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+        std::sort(ldata.begin()+7, ldata.end()-7, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 
-        /*
-        float minDist = ldata[5].dist;
+        
+        float minDist = ldata[7].dist;
         std::cout << "Min dist: " << minDist << std::endl;
-        const float minTope = 500;
-        float rot = 0;
-        if(minDist > minTope) {
-            differentialrobot_proxy->setSpeedBase(600, 0);
-        } else{
-            differentialrobot_proxy->setSpeedBase(10, 1);
-        }*/
+        if(minDist == 0) std::cout << ldata[7].angle << std::endl;
+        const float minTope = 600;
 
-        std::cout << "Rot: " << robotMove.rot << std::endl;
+
+        // Todos los estados mueven el robot
+        differentialrobot_proxy->setSpeedBase(robotMove.adv, robotMove.rot);
 
         switch (moveState) {
             case ADVANCE:
-                break;
-            case SPIRAL:
-                differentialrobot_proxy->setSpeedBase(robotMove.adv, robotMove.rot);
-                if(robotMove.rot < 0.5) robotMove.rot -= 0.0005;
-                else robotMove.rot -= 0.002;
+                if(minDist <= minTope && minDist != 0)
+                    changeState(OBSTACLE);
+                else if(minDist > 600)
+                    changeState(SPIRAL);
+            break;
 
-                break;
+            case SPIRAL:
+                if(robotMove.rot < 0.5) 
+                    robotMove.rot -= 0.0005;
+                else 
+                    robotMove.rot -= 0.002;
+
+                if(minDist <= minTope && minDist != 0)
+                    changeState(OBSTACLE);
+                else if(robotMove.rot < 0.3)
+                    changeState(SPIRAL);
+            break;
+
             case OBSTACLE:
-                break;
+                if(minDist > minTope)
+                    changeState(ADVANCE);
+            break;
+
+            case FAST:
+                if(minDist <= minTope && minDist != 0) {
+                    changeState(STOP);
+                }
+            break;
+
+            case STOP:
+            break;
         }
 
 
     }
     catch(const Ice::Exception &e) { std::cout << e << std::endl; }
+}
+
+void SpecificWorker::changeState(MoveStates_t newState) {
+    moveState = newState;
+
+    switch(newState) {
+        case ADVANCE:
+            std::cout << "ADVANCE" << std::endl;
+            robotMove.adv = 600;
+            robotMove.rot = 0;
+        break;
+
+        case SPIRAL:
+            std::cout << "SPIRAL" << std::endl;
+            robotMove.adv = 600;
+            robotMove.rot = 1.5;
+        break;
+        
+        case OBSTACLE:
+            std::cout << "OBSTACLE" << std::endl;
+            robotMove.adv = 10;
+            robotMove.rot = 1;
+        break;
+
+        case FAST:
+            std::cout << "FAST" << std::endl;
+            robotMove.adv = 800;
+            robotMove.rot = 0;
+
+        case STOP:
+            std::cout << "STOP" << std::endl;
+            robotMove.adv = 0;
+            robotMove.rot = 0;
+        break;           
+    }
 }
 
 int SpecificWorker::startup_check()
