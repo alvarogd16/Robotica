@@ -68,21 +68,33 @@ void SpecificWorker::initialize(int period)
 	}
 
 
-    changeState(ADVANCE);
+    changeState(SPIRAL);
 }
 
 void SpecificWorker::compute()
 {
 	try {
+        RoboCompGenericBase::TBaseState rdata;
+        differentialrobot_proxy->getBaseState(rdata);
+        // std::cout << rdata.alpha << std::endl;
+
         auto ldata = laser_proxy->getLaserData();
         std::sort(ldata.begin()+7, ldata.end()-7, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 
         
         float minDist = ldata[7].dist;
-        std::cout << "Min dist: " << minDist << std::endl;
+        // std::cout << "Min dist: " << minDist << std::endl;
         if(minDist == 0) std::cout << ldata[7].angle << std::endl;
         const float minTope = 600;
 
+        /*
+        if(rdata.alpha < -1.7) {
+            differentialrobot_proxy->setSpeedBase(0, -0.5);
+        } else if(rdata.alpha > -1.45) {
+            differentialrobot_proxy->setSpeedBase(0, 0.5);
+        } else {
+            differentialrobot_proxy->setSpeedBase(600, 0);
+        }*/
 
         // Todos los estados mueven el robot
         differentialrobot_proxy->setSpeedBase(robotMove.adv, robotMove.rot);
@@ -91,25 +103,25 @@ void SpecificWorker::compute()
             case ADVANCE:
                 if(minDist <= minTope && minDist != 0)
                     changeState(OBSTACLE);
-                else if(minDist > 600)
-                    changeState(SPIRAL);
+                /*else if(minDist > 600)
+                    changeState(SPIRAL);*/
             break;
 
             case SPIRAL:
                 if(robotMove.rot < 0.5) 
                     robotMove.rot -= 0.0005;
                 else 
-                    robotMove.rot -= 0.002;
+                    robotMove.rot -= 0.0025;
 
                 if(minDist <= minTope && minDist != 0)
                     changeState(OBSTACLE);
                 else if(robotMove.rot < 0.3)
-                    changeState(SPIRAL);
+                    changeState(ADVANCE);
             break;
 
             case OBSTACLE:
                 if(minDist > minTope)
-                    changeState(ADVANCE);
+                    changeState(SPIRAL);
             break;
 
             case FAST:

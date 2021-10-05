@@ -48,7 +48,7 @@ private:
 	std::shared_ptr < InnerModel > innerModel;
 	bool startup_check_flag;
 
-    enum MoveStates_t {ADVANCE, SPIRAL, OBSTACLE, FAST, STOP};
+    enum MoveStates_t {ADVANCE, SPIRAL, OBSTACLE, FAST, STOP, GIRO};
     MoveStates_t moveState;
 	void changeState(MoveStates_t newState);
 
