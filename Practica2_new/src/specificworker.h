@@ -48,7 +48,7 @@ private:
 	std::shared_ptr < InnerModel > innerModel;
 	bool startup_check_flag;
 
-    enum MoveStates_t {ADVANCE, SPIRAL, OBSTACLE, FAST, STOP, GIRO};
+    enum MoveStates_t {ADVANCE, SPIRAL, OBSTACLE, STOP};
     MoveStates_t moveState;
 	void changeState(MoveStates_t newState);
 
@@ -56,6 +56,13 @@ private:
         float adv = 0;
         float rot = 0;
     } robotMove;
+
+	long timeAdvance = 0;
+	bool giroDerecha = true;
+
+	bool visitadosMap[10000/400][5000/400];
+	void coordRobotToMap(float xR, float zR, int &xM, int &zM);
+	bool casillasCercanasVisitadas(int x, int z);
 };
 
 #endif

@@ -67,6 +67,9 @@ void SpecificWorker::initialize(int period)
 		timer.start(Period);
 	}
 
+    for(int i = 0; i < (10000/400); i++)
+        for(int j = 0; j < (5000/400); j++)
+            visitadosMap[i][j] = 0;
 
     changeState(SPIRAL);
 }
@@ -74,37 +77,46 @@ void SpecificWorker::initialize(int period)
 void SpecificWorker::compute()
 {
 	try {
+
+        // Obtención de datos
         RoboCompGenericBase::TBaseState rdata;
         differentialrobot_proxy->getBaseState(rdata);
-        // std::cout << rdata.alpha << std::endl;
-
         auto ldata = laser_proxy->getLaserData();
-        std::sort(ldata.begin()+7, ldata.end()-7, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+
+        // Tranformacion de coordenadas
+        int xRobotMap, zRobotMap;
+        coordRobotToMap(rdata.x, rdata.z, xRobotMap, zRobotMap);
+        // std::cout << " " << xRobotMap << " " << zRobotMap << std::endl;
+
+        // Actualización del mapa
+        visitadosMap[xRobotMap][zRobotMap] = 1;
+
+
+        std::sort(ldata.begin()+10, ldata.end()-10, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 
         
-        float minDist = ldata[7].dist;
+        float minDist = ldata[10].dist;
+        float minAngle = ldata[10].angle;
         // std::cout << "Min dist: " << minDist << std::endl;
-        if(minDist == 0) std::cout << ldata[7].angle << std::endl;
-        const float minTope = 600;
+        if(minDist == 0) std::cout << ldata[10].angle << std::endl;
+        const float minTope = 500;
 
-        /*
-        if(rdata.alpha < -1.7) {
-            differentialrobot_proxy->setSpeedBase(0, -0.5);
-        } else if(rdata.alpha > -1.45) {
-            differentialrobot_proxy->setSpeedBase(0, 0.5);
-        } else {
-            differentialrobot_proxy->setSpeedBase(600, 0);
-        }*/
+
+        giroDerecha = minAngle < 0;
+
 
         // Todos los estados mueven el robot
         differentialrobot_proxy->setSpeedBase(robotMove.adv, robotMove.rot);
 
         switch (moveState) {
             case ADVANCE:
-                if(minDist <= minTope && minDist != 0)
+                timeAdvance++;
+                if(minDist <= minTope && minDist != 0){
                     changeState(OBSTACLE);
-                /*else if(minDist > 600)
-                    changeState(SPIRAL);*/
+                    std::cout << "MinAngle: " << minAngle << std::endl;
+                }
+                else if(minDist > 700 && timeAdvance > 75)
+                    changeState(SPIRAL);
             break;
 
             case SPIRAL:
@@ -113,21 +125,16 @@ void SpecificWorker::compute()
                 else 
                     robotMove.rot -= 0.0025;
 
+
                 if(minDist <= minTope && minDist != 0)
                     changeState(OBSTACLE);
-                else if(robotMove.rot < 0.3)
+                else if(casillasCercanasVisitadas(xRobotMap, zRobotMap) || robotMove.rot < 0.3)
                     changeState(ADVANCE);
             break;
 
             case OBSTACLE:
                 if(minDist > minTope)
-                    changeState(SPIRAL);
-            break;
-
-            case FAST:
-                if(minDist <= minTope && minDist != 0) {
-                    changeState(STOP);
-                }
+                    changeState(ADVANCE);
             break;
 
             case STOP:
@@ -153,18 +160,16 @@ void SpecificWorker::changeState(MoveStates_t newState) {
             std::cout << "SPIRAL" << std::endl;
             robotMove.adv = 600;
             robotMove.rot = 1.5;
+            timeAdvance = 0;
         break;
         
         case OBSTACLE:
             std::cout << "OBSTACLE" << std::endl;
             robotMove.adv = 10;
-            robotMove.rot = 1;
+            robotMove.rot = giroDerecha ? 1 : -1;
+            timeAdvance = 0;
+            // giroDerecha = !giroDerecha;
         break;
-
-        case FAST:
-            std::cout << "FAST" << std::endl;
-            robotMove.adv = 800;
-            robotMove.rot = 0;
 
         case STOP:
             std::cout << "STOP" << std::endl;
@@ -172,6 +177,17 @@ void SpecificWorker::changeState(MoveStates_t newState) {
             robotMove.rot = 0;
         break;           
     }
+}
+
+void SpecificWorker::coordRobotToMap(float xR, float zR, int &xM, int &zM) {
+    xM = (int) ((10000.0/400.0) / 10000.0 * (xR+5000));
+    zM = (int) ((5000.0/400.0) / 5000.0 * (zR+2500));
+}
+
+bool SpecificWorker::casillasCercanasVisitadas(int x, int z) {
+    return visitadosMap[x-1][z-1] && visitadosMap[x-1][z] && visitadosMap[x-1][z+1] 
+            && visitadosMap[x][z-1] && visitadosMap[x][z] && visitadosMap[x][z+1]
+            && visitadosMap[x+1][z-1] && visitadosMap[x+1][z] && visitadosMap[x+1][z+1];
 }
 
 int SpecificWorker::startup_check()
