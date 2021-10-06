@@ -44,10 +44,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alvaro/Documents/Robotica/Robotica/Practica2_new
+CMAKE_SOURCE_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alvaro/Documents/Robotica/Robotica/Practica2_new
+CMAKE_BINARY_DIR = /home/alumno/G5-X1/Robotica/Practica2_new
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -72,7 +72,7 @@ clean: src/clean
 
 # Recursive "all" directory target.
 src/all: src/CMakeFiles/PruebaComp.dir/all
-src/all: src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/all
+src/all: src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/all
 
 .PHONY : src/all
 
@@ -83,7 +83,7 @@ src/preinstall:
 
 # Recursive "clean" directory target.
 src/clean: src/CMakeFiles/PruebaComp.dir/clean
-src/clean: src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/clean
+src/clean: src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/clean
 src/clean: src/CMakeFiles/PruebaComp_autogen.dir/clean
 
 .PHONY : src/clean
@@ -92,18 +92,18 @@ src/clean: src/CMakeFiles/PruebaComp_autogen.dir/clean
 # Target rules for target src/CMakeFiles/PruebaComp.dir
 
 # All Build rule for target.
-src/CMakeFiles/PruebaComp.dir/all: src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/all
+src/CMakeFiles/PruebaComp.dir/all: src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/all
 src/CMakeFiles/PruebaComp.dir/all: src/CMakeFiles/PruebaComp_autogen.dir/all
 	$(MAKE) -f src/CMakeFiles/PruebaComp.dir/build.make src/CMakeFiles/PruebaComp.dir/depend
 	$(MAKE) -f src/CMakeFiles/PruebaComp.dir/build.make src/CMakeFiles/PruebaComp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target PruebaComp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target PruebaComp"
 .PHONY : src/CMakeFiles/PruebaComp.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/PruebaComp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 20
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/PruebaComp.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 0
 .PHONY : src/CMakeFiles/PruebaComp.dir/rule
 
 # Convenience name for target.
@@ -117,31 +117,31 @@ src/CMakeFiles/PruebaComp.dir/clean:
 .PHONY : src/CMakeFiles/PruebaComp.dir/clean
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir
+# Target rules for target src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir
 
 # All Build rule for target.
-src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/all:
-	$(MAKE) -f src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/depend
-	$(MAKE) -f src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles --progress-num= "Built target ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src"
-.PHONY : src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/all
+src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/all:
+	$(MAKE) -f src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/depend
+	$(MAKE) -f src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles --progress-num= "Built target ICES__home_alumno_G5-X1_Robotica_Practica2_new_src"
+.PHONY : src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 0
-.PHONY : src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/rule
+src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 0
+.PHONY : src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/rule
 
 # Convenience name for target.
-ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src: src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/rule
+ICES__home_alumno_G5-X1_Robotica_Practica2_new_src: src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/rule
 
-.PHONY : ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src
+.PHONY : ICES__home_alumno_G5-X1_Robotica_Practica2_new_src
 
 # clean rule for target.
-src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/clean:
-	$(MAKE) -f src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/clean
-.PHONY : src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.dir/clean
+src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/clean:
+	$(MAKE) -f src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/build.make src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/clean
+.PHONY : src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica2_new_src.dir/clean
 
 #=============================================================================
 # Target rules for target src/CMakeFiles/PruebaComp_autogen.dir
@@ -150,14 +150,14 @@ src/CMakeFiles/ICES__home_alvaro_Documents_Robotica_Robotica_Practica2_new_src.d
 src/CMakeFiles/PruebaComp_autogen.dir/all:
 	$(MAKE) -f src/CMakeFiles/PruebaComp_autogen.dir/build.make src/CMakeFiles/PruebaComp_autogen.dir/depend
 	$(MAKE) -f src/CMakeFiles/PruebaComp_autogen.dir/build.make src/CMakeFiles/PruebaComp_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles --progress-num=20 "Built target PruebaComp_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles --progress-num=20 "Built target PruebaComp_autogen"
 .PHONY : src/CMakeFiles/PruebaComp_autogen.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/PruebaComp_autogen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/PruebaComp_autogen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alvaro/Documents/Robotica/Robotica/Practica2_new/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica2_new/CMakeFiles 0
 .PHONY : src/CMakeFiles/PruebaComp_autogen.dir/rule
 
 # Convenience name for target.

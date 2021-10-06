@@ -91,14 +91,14 @@ void SpecificWorker::compute()
         // Actualización del mapa
         visitadosMap[xRobotMap][zRobotMap] = 1;
 
-
-        std::sort(ldata.begin()+10, ldata.end()-10, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+        int limit = ldata.size()/3;
+        std::sort(ldata.begin()+limit, ldata.end()-limit, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 
         
-        float minDist = ldata[10].dist;
-        float minAngle = ldata[10].angle;
+        float minDist = ldata[limit].dist;
+        float minAngle = ldata[limit].angle;
         // std::cout << "Min dist: " << minDist << std::endl;
-        if(minDist == 0) std::cout << ldata[10].angle << std::endl;
+        if(minDist == 0) std::cout << minAngle << std::endl;
         const float minTope = 500;
 
 
@@ -115,7 +115,7 @@ void SpecificWorker::compute()
                     changeState(OBSTACLE);
                     std::cout << "MinAngle: " << minAngle << std::endl;
                 }
-                else if(minDist > 700 && timeAdvance > 75)
+                else if(minDist > 700 && timeAdvance > 60)
                     changeState(SPIRAL);
             break;
 
