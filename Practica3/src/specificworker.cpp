@@ -85,10 +85,37 @@ void SpecificWorker::initialize(int period)
 
 void SpecificWorker::compute()
 {
+    // Leer y pintar robot
     RoboCompGenericBase::TBaseState bState;
     differentialrobot_proxy->getBaseState(bState);
     robot_polygon->setRotation(bState.alpha*180/M_PI);
     robot_polygon->setPos(bState.x, bState.z);
+
+    // Leer y pintar laser
+    auto ldata = laser_proxy->getLaserData();
+    draw_laser(ldata);
+
+
+    if(target.activo) {
+        float vel, rot;
+
+        // Pasar target a robot coord
+        auto target_robot = worldToRobot(target.point);
+
+        // Calcular angulo entre robot y target
+        // rot = atan2(target_robot.x(), target_robot.y());
+
+        // Calcular velocidad de avance
+        // vel =
+
+        // Mandar a robot
+        /*
+        try {
+            differentialrobot_proxy->setSpeedBase(vel, rot);
+        } catch (const Ice::Exception &e) {
+            std::cout << e.what() << std::endl;
+        }*/
+    }
 }
 
 int SpecificWorker::startup_check()
@@ -100,9 +127,40 @@ int SpecificWorker::startup_check()
 
 void SpecificWorker::new_target_slot(QPointF point) {
     qInfo() << point;
-    puntoMapa.point = point;
-    puntoMapa.clicked = true;
+    target.point = point;
+    target.activo = true;
 }
+
+QPointF SpecificWorker::worldToRobot(QPointF p_world) {
+    return QPointF(0, 0);
+}
+
+void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot coordinates
+{
+    static QGraphicsItem *laser_polygon = nullptr;
+
+    if(laser_polygon != nullptr)
+        viewer->scene.removeItem(laser_polygon);
+    // code to delete any existing laser graphic element
+
+    QPolygonF poly;
+
+    QPointF point(0, 0);
+    poly << point;
+    for(auto &p : ldata) {
+        point.setX(p.dist * sin(p.angle));
+        point.setY(p.dist * cos(p.angle));
+
+        poly << point;
+    }
+    // code to fill poly with the laser polar coordinates (angle, dist) transformed to cartesian coordinates (x,y), all in the robot's  // reference system
+
+    QColor color("LightGreen");
+    color.setAlpha(40);
+    laser_polygon = viewer->scene.addPolygon(laser_in_robot_polygon->mapToScene(poly), QPen(QColor("DarkGreen"), 30), QBrush(color));
+    laser_polygon->setZValue(3);
+}
+
 
 
 /**************************************/

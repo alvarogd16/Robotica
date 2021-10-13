@@ -57,10 +57,10 @@ RM = /snap/clion/164/bin/cmake/linux/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alumno/G5-X1/Robotica/Practica3
+CMAKE_SOURCE_DIR = /home/alumno/Robotica/Robotica/Practica3
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alumno/G5-X1/Robotica/Practica3
+CMAKE_BINARY_DIR = /home/alumno/Robotica/Robotica/Practica3
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica3/CMakeFiles /home/alumno/G5-X1/Robotica/Practica3//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/Robotica/Robotica/Practica3/CMakeFiles /home/alumno/Robotica/Robotica/Practica3//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/G5-X1/Robotica/Practica3/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alumno/Robotica/Robotica/Practica3/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ICES__home_alumno_G5-X1_Robotica_Practica3_src
+# Target rules for targets named ICES__home_alumno_Robotica_Robotica_Practica3_src
 
 # Build rule for target.
-ICES__home_alumno_G5-X1_Robotica_Practica3_src: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ICES__home_alumno_G5-X1_Robotica_Practica3_src
-.PHONY : ICES__home_alumno_G5-X1_Robotica_Practica3_src
+ICES__home_alumno_Robotica_Robotica_Practica3_src: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ICES__home_alumno_Robotica_Robotica_Practica3_src
+.PHONY : ICES__home_alumno_Robotica_Robotica_Practica3_src
 
 # fast build rule for target.
-ICES__home_alumno_G5-X1_Robotica_Practica3_src/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica3_src.dir/build.make src/CMakeFiles/ICES__home_alumno_G5-X1_Robotica_Practica3_src.dir/build
-.PHONY : ICES__home_alumno_G5-X1_Robotica_Practica3_src/fast
+ICES__home_alumno_Robotica_Robotica_Practica3_src/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/ICES__home_alumno_Robotica_Robotica_Practica3_src.dir/build.make src/CMakeFiles/ICES__home_alumno_Robotica_Robotica_Practica3_src.dir/build
+.PHONY : ICES__home_alumno_Robotica_Robotica_Practica3_src/fast
 
 #=============================================================================
 # Target rules for targets named gotoxy
@@ -212,7 +212,7 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... ICES__home_alumno_G5-X1_Robotica_Practica3_src"
+	@echo "... ICES__home_alumno_Robotica_Robotica_Practica3_src"
 	@echo "... gotoxy_autogen"
 	@echo "... gotoxy"
 .PHONY : help

@@ -30,6 +30,7 @@
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
 #include "abstract_graphic_viewer/abstract_graphic_viewer.h"
+#include <eigen3/Eigen/Eigen>
 
 class SpecificWorker : public GenericWorker
 {
@@ -57,10 +58,15 @@ private:
 
     QPointF last_point;
 
-    struct puntoMapa_t {
+    struct Target_t {
         QPointF point;
-        bool clicked = false;
-    } puntoMapa;
+        bool activo = false;
+    } target;
+
+    const int MAX_ADV_SPEED = 1000;
+
+    QPointF worldToRobot(QPointF p_world);
+    void draw_laser(const RoboCompLaser::TLaserData &ldata);
 };
 
 #endif
