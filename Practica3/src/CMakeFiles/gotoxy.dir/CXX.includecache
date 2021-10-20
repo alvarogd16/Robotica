@@ -6,21 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/alvaro/Documents/Robotica/Robotica/Practica3/src/specificworker.cpp
+/home/robocomp/X5-G1/Robotica/Practica3/src/specificworker.cpp
 specificworker.h
-/home/alvaro/Documents/Robotica/Robotica/Practica3/src/specificworker.h
+/home/robocomp/X5-G1/Robotica/Practica3/src/specificworker.h
 
-/home/alvaro/Documents/Robotica/Robotica/Practica3/src/specificworker.h
+/home/robocomp/X5-G1/Robotica/Practica3/src/specificworker.h
 genericworker.h
 -
 innermodel/innermodel.h
 -
 abstract_graphic_viewer/abstract_graphic_viewer.h
-/home/alvaro/Documents/Robotica/Robotica/Practica3/src/abstract_graphic_viewer/abstract_graphic_viewer.h
+/home/robocomp/X5-G1/Robotica/Practica3/src/abstract_graphic_viewer/abstract_graphic_viewer.h
 eigen3/Eigen/Eigen
 -
 
-/home/alvaro/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h
+/opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h
 QWidget
 -
 QGraphicsScene
@@ -44,9 +44,9 @@ QGraphicsPolygonItem
 iostream
 -
 
-/home/alvaro/robocomp/classes/qlog/qlog.h
+/opt/robocomp/classes/qlog/qlog.h
 config.h
-/home/alvaro/robocomp/classes/qlog/config.h
+/opt/robocomp/classes/qlog/config.h
 QtCore
 -
 iostream

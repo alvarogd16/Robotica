@@ -97,7 +97,7 @@ void SpecificWorker::compute()
 
 
     if(target.activo) {
-        float vel, rot;
+        float dist, vel, rot, angle;
 
         // Pasar target a robot coord
         Eigen::Vector2f p_world(target.point.x(), target.point.y());
@@ -105,24 +105,36 @@ void SpecificWorker::compute()
         Eigen::Vector2f target_robot = worldToRobot(p_world, p_robot, bState.alpha);
 
         // Calcular angulo entre robot y target
-        rot = atan2(target_robot.x(), target_robot.y());
-        std::cout << rot << std::endl;
+        angle = atan2(-target_robot.y(), target_robot.x()) + M_PI_2;
+//        std::cout << "Angle: " << (angle*180)/M_PI << "rX, rY: " << p_robot.x() << ", " << p_robot.y();
+//        std::cout << "tX, tY: " << target_robot.x() << ", " << target_robot.y() << std::endl;
+        rot = angle * 0.8;
+
+        // Calcular velocidad de avance
+        dist = sqrt(pow(target_robot.x(), 2) + pow(target_robot.y(), 2));
+        vel = dist * 0.8;
+//        std::cout << "Vel: " << vel << " Dist: " << dist << std::endl;
 
 
         try {
-            if(rot < 0.2) {
+            if(angle < 0.2 && angle > -0.2) {
+                if(dist < 300) {
+                    std::cout << "Parado" << std::endl;
+                    vel = 0;
+                    target.activo = false;
+                }
+
                 rot = 0;
-                target.activo = false;
+                // target.activo = false;
                 std::cout << "Girooo!!" << std::endl;
+            } else {
+                vel = 0;
             }
 
-            differentialrobot_proxy->setSpeedBase(0, rot);
+            differentialrobot_proxy->setSpeedBase(vel, rot);
         } catch (const Ice::Exception &e) {
             std::cout << e.what() << std::endl;
         }
-
-        // Calcular velocidad de avance
-        // vel =
 
         // Mandar a robot
         /*
@@ -149,7 +161,7 @@ void SpecificWorker::new_target_slot(QPointF point) {
 
 Eigen::Vector2f SpecificWorker::worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle) {
     Eigen::Matrix2f m_rotation;
-    m_rotation << cos(angle), -sin(angle), sin(angle), cos(angle);
+    m_rotation << cos(angle), sin(angle), -sin(angle), cos(angle);
 
     return m_rotation * (p_world - p_robot);
 }
