@@ -100,10 +100,26 @@ void SpecificWorker::compute()
         float vel, rot;
 
         // Pasar target a robot coord
-        auto target_robot = worldToRobot(target.point);
+        Eigen::Vector2f p_world(target.point.x(), target.point.y());
+        Eigen::Vector2f p_robot(bState.x, bState.z);
+        Eigen::Vector2f target_robot = worldToRobot(p_world, p_robot, bState.alpha);
 
         // Calcular angulo entre robot y target
-        // rot = atan2(target_robot.x(), target_robot.y());
+        rot = atan2(target_robot.x(), target_robot.y());
+        std::cout << rot << std::endl;
+
+
+        try {
+            if(rot < 0.2) {
+                rot = 0;
+                target.activo = false;
+                std::cout << "Girooo!!" << std::endl;
+            }
+
+            differentialrobot_proxy->setSpeedBase(0, rot);
+        } catch (const Ice::Exception &e) {
+            std::cout << e.what() << std::endl;
+        }
 
         // Calcular velocidad de avance
         // vel =
@@ -131,8 +147,11 @@ void SpecificWorker::new_target_slot(QPointF point) {
     target.activo = true;
 }
 
-QPointF SpecificWorker::worldToRobot(QPointF p_world) {
-    return QPointF(0, 0);
+Eigen::Vector2f SpecificWorker::worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle) {
+    Eigen::Matrix2f m_rotation;
+    m_rotation << cos(angle), -sin(angle), sin(angle), cos(angle);
+
+    return m_rotation * (p_world - p_robot);
 }
 
 void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot coordinates

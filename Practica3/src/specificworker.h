@@ -65,7 +65,7 @@ private:
 
     const int MAX_ADV_SPEED = 1000;
 
-    QPointF worldToRobot(QPointF p_world);
+    Eigen::Vector2f worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
 };
 
