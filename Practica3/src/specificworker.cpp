@@ -106,14 +106,14 @@ void SpecificWorker::compute()
 
         // Calcular angulo entre robot y target
         angle = atan2(-target_robot.y(), target_robot.x()) + M_PI_2;
-//        std::cout << "Angle: " << (angle*180)/M_PI << "rX, rY: " << p_robot.x() << ", " << p_robot.y();
+        // std::cout << "Angle: " << (angle*180)/M_PI << "rX, rY: " << p_robot.x() << ", " << p_robot.y();
 //        std::cout << "tX, tY: " << target_robot.x() << ", " << target_robot.y() << std::endl;
-        rot = angle * 0.8;
+        rot = angle;
 
         // Calcular velocidad de avance
         dist = sqrt(pow(target_robot.x(), 2) + pow(target_robot.y(), 2));
-        vel = dist * 0.8;
-//        std::cout << "Vel: " << vel << " Dist: " << dist << std::endl;
+        vel = 1000 * reduce_speed_if_turning(angle) * reduce_speed_if_close_to_target(dist); //dist * 0.8
+        // std::cout << "Vel: " << vel << " Dist: " << dist << std::endl;
 
 
         try {
@@ -121,28 +121,19 @@ void SpecificWorker::compute()
                 if(dist < 300) {
                     std::cout << "Parado" << std::endl;
                     vel = 0;
+                    rot = 0;
                     target.activo = false;
                 }
 
-                rot = 0;
+                // rot = 0;
                 // target.activo = false;
                 std::cout << "Girooo!!" << std::endl;
-            } else {
-                vel = 0;
             }
 
             differentialrobot_proxy->setSpeedBase(vel, rot);
         } catch (const Ice::Exception &e) {
             std::cout << e.what() << std::endl;
         }
-
-        // Mandar a robot
-        /*
-        try {
-            differentialrobot_proxy->setSpeedBase(vel, rot);
-        } catch (const Ice::Exception &e) {
-            std::cout << e.what() << std::endl;
-        }*/
     }
 }
 
@@ -190,6 +181,17 @@ void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot
     color.setAlpha(40);
     laser_polygon = viewer->scene.addPolygon(laser_in_robot_polygon->mapToScene(poly), QPen(QColor("DarkGreen"), 30), QBrush(color));
     laser_polygon->setZValue(3);
+}
+
+float SpecificWorker::reduce_speed_if_turning(float angle) {
+    return std::exp(-std::pow(angle, 2) / 0.02714);
+}
+
+float SpecificWorker::reduce_speed_if_close_to_target(float dist) {
+    if(dist >= 1000)
+        return 1;
+    else
+        return dist / 1000;
 }
 
 

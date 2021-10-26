@@ -67,6 +67,8 @@ private:
 
     Eigen::Vector2f worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
+    float reduce_speed_if_turning(float angle);
+    float reduce_speed_if_close_to_target(float dist);
 };
 
 #endif
