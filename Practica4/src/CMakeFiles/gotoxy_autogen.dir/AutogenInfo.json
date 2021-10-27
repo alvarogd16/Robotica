@@ -1,12 +1,12 @@
 {
-	"BUILD_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3/src/gotoxy_autogen",
-	"CMAKE_BINARY_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3/src",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3/src",
+	"BUILD_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4/src/gotoxy_autogen",
+	"CMAKE_BINARY_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4/src",
 	"CMAKE_EXECUTABLE" : "/snap/clion/169/bin/cmake/linux/bin/cmake",
 	"CMAKE_LIST_FILES" : 
 	[
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/CMakeLists.txt",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/CMakeLists.txt",
 		"/opt/robocomp/cmake/robocomp.cmake",
 		"/opt/robocomp/cmake/modules/qt.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake",
@@ -68,7 +68,7 @@
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QConnmanEnginePlugin.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QNetworkManagerEnginePlugin.cmake",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/CMakeListsSpecific.txt",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/CMakeListsSpecific.txt",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindIce.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/SelectLibraryConfigurations.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/SelectLibraryConfigurations.cmake",
@@ -91,37 +91,37 @@
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageMessage.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3",
+	"CMAKE_SOURCE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
 	"HEADERS" : 
 	[
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/commonbehaviorI.h",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/commonbehaviorI.h",
 			"MU",
 			"EWIEGA46WW/moc_commonbehaviorI.cpp",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/genericmonitor.h",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/genericmonitor.h",
 			"MU",
 			"EWIEGA46WW/moc_genericmonitor.cpp",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/genericworker.h",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/genericworker.h",
 			"MU",
 			"EWIEGA46WW/moc_genericworker.cpp",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/specificmonitor.h",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/specificmonitor.h",
 			"MU",
 			"EWIEGA46WW/moc_specificmonitor.cpp",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/specificworker.h",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/specificworker.h",
 			"MU",
 			"EWIEGA46WW/moc_specificworker.cpp",
 			null
@@ -152,8 +152,8 @@
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica3/src/gotoxy_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/robocomp/G5-X1/Robotica/Practica3/src/gotoxy_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/robocomp/G5-X1/Robotica/Practica4/src/gotoxy_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/robocomp/G5-X1/Robotica/Practica4/src/gotoxy_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"ICE_CPP11_MAPPING",
@@ -175,11 +175,11 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/home/robocomp/G5-X1/Robotica/Practica3/src",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src",
 		"/opt/robocomp/include",
 		"/classes",
-		"/home/robocomp/G5-X1/Robotica/Practica3",
+		"/home/robocomp/G5-X1/Robotica/Practica4",
 		"/opt/robocomp/classes",
 		"/opt/robocomp/libs",
 		"/opt/robocomp/interfaces",
@@ -213,49 +213,49 @@
 		"-c",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/robocomp/G5-X1/Robotica/Practica3/src/gotoxy_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/robocomp/G5-X1/Robotica/Practica4/src/gotoxy_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/CommonBehavior.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/DifferentialRobot.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/GenericBase.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/Laser.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/ui_mainUI.h"
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/CommonBehavior.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/DifferentialRobot.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/GenericBase.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/Laser.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/ui_mainUI.h"
 	],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 8,
-	"PARSE_CACHE_FILE" : "/home/robocomp/G5-X1/Robotica/Practica3/src/CMakeFiles/gotoxy_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/home/robocomp/G5-X1/Robotica/Practica4/src/CMakeFiles/gotoxy_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "/usr/lib/qt5/bin/uic",
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 12,
-	"SETTINGS_FILE" : "/home/robocomp/G5-X1/Robotica/Practica3/src/CMakeFiles/gotoxy_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/robocomp/G5-X1/Robotica/Practica4/src/CMakeFiles/gotoxy_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/commonbehaviorI.cpp",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/commonbehaviorI.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/genericmonitor.cpp",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/genericmonitor.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/genericworker.cpp",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/genericworker.cpp",
 			"MU",
 			null
 		],
-		[ "/home/robocomp/G5-X1/Robotica/Practica3/src/main.cpp", "MU", null ],
+		[ "/home/robocomp/G5-X1/Robotica/Practica4/src/main.cpp", "MU", null ],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/specificmonitor.cpp",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/specificmonitor.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/robocomp/G5-X1/Robotica/Practica3/src/specificworker.cpp",
+			"/home/robocomp/G5-X1/Robotica/Practica4/src/specificworker.cpp",
 			"MU",
 			null
 		],
@@ -267,12 +267,12 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/CommonBehavior.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/DifferentialRobot.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/GenericBase.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/Laser.cpp",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/mainUI.ui",
-		"/home/robocomp/G5-X1/Robotica/Practica3/src/ui_mainUI.h"
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/CommonBehavior.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/DifferentialRobot.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/GenericBase.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/Laser.cpp",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/mainUI.ui",
+		"/home/robocomp/G5-X1/Robotica/Practica4/src/ui_mainUI.h"
 	],
 	"UIC_UI_FILES" : [],
 	"VERBOSITY" : 0

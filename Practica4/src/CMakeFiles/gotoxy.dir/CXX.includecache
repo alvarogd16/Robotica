@@ -6,17 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/robocomp/G5-X1/Robotica/Practica3/src/specificworker.cpp
+/home/robocomp/G5-X1/Robotica/Practica4/src/specificworker.cpp
 specificworker.h
-/home/robocomp/G5-X1/Robotica/Practica3/src/specificworker.h
+/home/robocomp/G5-X1/Robotica/Practica4/src/specificworker.h
 
-/home/robocomp/G5-X1/Robotica/Practica3/src/specificworker.h
+/home/robocomp/G5-X1/Robotica/Practica4/src/specificworker.h
 genericworker.h
 -
 innermodel/innermodel.h
 -
 abstract_graphic_viewer/abstract_graphic_viewer.h
-/home/robocomp/G5-X1/Robotica/Practica3/src/abstract_graphic_viewer/abstract_graphic_viewer.h
+/home/robocomp/G5-X1/Robotica/Practica4/src/abstract_graphic_viewer/abstract_graphic_viewer.h
 eigen3/Eigen/Eigen
 -
 

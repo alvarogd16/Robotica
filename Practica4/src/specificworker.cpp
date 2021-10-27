@@ -81,6 +81,7 @@ void SpecificWorker::initialize(int period)
     catch(const Ice::Exception &e) { std::cout << e.what() << std::endl;}
     connect(viewer, &AbstractGraphicViewer::new_mouse_coordinates, this, &SpecificWorker::new_target_slot);
 
+    moveState = ADVANCE;
 }
 
 void SpecificWorker::compute()
@@ -116,40 +117,53 @@ void SpecificWorker::compute()
         // std::cout << "Vel: " << vel << " Dist: " << dist << std::endl;
 
         int limit = ldata.size()/3;
+        float izq_1 = ldata[20].dist;
+        float izq_2 = ldata[60].dist;
         std::sort(ldata.begin()+limit, ldata.end()-limit, [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
         float minDist = ldata[limit].dist;
-        float izq = ldata[40].dist;
+
+        vel = vel * (minDist > 1000 ? 1 : minDist/1000);
 
         try {
-            if(angle < 0.2 && angle > -0.2) {
-                if(dist < 300) {
-                    std::cout << "Parado" << std::endl;
-                    vel = 0;
-                    rot = 0;
-                    target.activo = false;
-                }
+            switch(moveState) {
+                case ADVANCE:
+                    if(minDist < 600) {
+                        std::cout << "Obstaculo" << std::endl;
+                        moveState = OBSTACLE;
+                    }
 
-                // rot = 0;
-                // target.activo = false;
-                std::cout << "Girooo!!" << std::endl;
+                    if (dist < 300) {
+                        std::cout << "Parado" << std::endl;
+                        vel = 0;
+                        rot = 0;
+                        target.activo = false;
+                    }
+                    break;
+
+                case OBSTACLE:
+                    if(angle < 0.2 && angle > -0.2 && minDist >= 600){
+                        std::cout << "Avanzar" << std::endl;
+                        moveState = ADVANCE;
+                    }
+
+                    if(izq_1 > minDist) {
+                        rot = 0.5;
+                        vel = 0;
+                    } else {
+                        if(izq_2 > izq_1+100) {
+                            rot = -0.5;
+                            vel = 50;
+                        } else {
+                            rot = 0;
+                            vel = 500;
+                        }
+
+                    }
+                    break;
             }
 
-            if(minDist < 600){
-                std::cout << "Obstaculo" << std::endl;
-
-
-                if(izq > 400){
-                    vel = 0;
-                    rot = 0.5;
-                } else {
-                    vel = 800;
-                    rot = 0;
-                }
-            }
-
-                differentialrobot_proxy->setSpeedBase(vel, rot);
-
-
+            std::cout << "Izq: " << izq_1 << ", " << izq_2 << " Min: " << minDist << " Vel: " << vel << " Rot: " << rot << std::endl;
+            differentialrobot_proxy->setSpeedBase(vel, rot);
         } catch (const Ice::Exception &e) {
             std::cout << e.what() << std::endl;
         }

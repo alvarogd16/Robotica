@@ -50,13 +50,14 @@ public slots:
 private:
 	std::shared_ptr < InnerModel > innerModel;
 	bool startup_check_flag;
-
     AbstractGraphicViewer *viewer;
     const int ROBOT_LENGTH = 400;
     QGraphicsPolygonItem *robot_polygon;
     QGraphicsRectItem *laser_in_robot_polygon;
 
     QPointF last_point;
+
+    enum MoveStates_t {ADVANCE, OBSTACLE, STOP} moveState;
 
     struct Target_t {
         QPointF point;
