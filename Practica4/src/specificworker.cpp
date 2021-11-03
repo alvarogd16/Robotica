@@ -124,6 +124,12 @@ void SpecificWorker::compute()
 
         vel = vel * (minDist > 1000 ? 1 : minDist/1000);
 
+        float A,B,C,distance;
+        A = p_robot.y() - target_robot.y();
+        B = target_robot.x() - p_robot.x();
+        C = (p_robot.x() - target_robot.x())*p_robot.y() + (target_robot.y() - p_robot.y())*p_robot.x();
+        distance = fabs(A*p_robot.x() + B*p_robot.y() + C) / sqrt(pow(A,2) + pow(B,2));
+
         try {
             switch(moveState) {
                 case ADVANCE:
@@ -141,17 +147,18 @@ void SpecificWorker::compute()
                     break;
 
                 case OBSTACLE:
-                    if(angle < 0.2 && angle > -0.2 && minDist >= 600){
+                    //angle < 0.2 && angle > -0.2 &&
+                    if(distance < 50){
                         std::cout << "Avanzar" << std::endl;
                         moveState = ADVANCE;
                     }
 
                     if(izq_1 > minDist) {
-                        rot = 0.5;
+                        rot = 0.4;
                         vel = 0;
                     } else {
                         if(izq_2 > izq_1+100) {
-                            rot = -0.5;
+                            rot = -0.4;
                             vel = 50;
                         } else {
                             rot = 0;
@@ -162,7 +169,7 @@ void SpecificWorker::compute()
                     break;
             }
 
-            std::cout << "Izq: " << izq_1 << ", " << izq_2 << " Min: " << minDist << " Vel: " << vel << " Rot: " << rot << std::endl;
+            std::cout <<"Distancia: " << distance << "Izq: " << izq_1 << ", " << izq_2 << " Min: " << minDist << " Vel: " << vel << " Rot: " << rot << std::endl;
             differentialrobot_proxy->setSpeedBase(vel, rot);
         } catch (const Ice::Exception &e) {
             std::cout << e.what() << std::endl;
