@@ -30,6 +30,7 @@
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
 #include "abstract_graphic_viewer/abstract_graphic_viewer.h"
+#include "grid2d/grid.h"
 #include <eigen3/Eigen/Eigen>
 
 class SpecificWorker : public GenericWorker
@@ -55,21 +56,16 @@ private:
     QGraphicsPolygonItem *robot_polygon;
     QGraphicsRectItem *laser_in_robot_polygon;
 
-    QPointF last_point;
+    // GRID
+    const int TILE_SIZE = 100;
+    Grid grid;
 
-    enum MoveStates_t {ADVANCE, OBSTACLE, STOP} moveState;
-
-    struct Target_t {
-        QPointF point;
-        bool activo = false;
-    } target;
+    enum MoveStates_t {ADVANCE, TURN, BORDER, STOP} moveState;
 
     const int MAX_ADV_SPEED = 1000;
 
     Eigen::Vector2f worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
-    float reduce_speed_if_turning(float angle);
-    float reduce_speed_if_close_to_target(float dist);
 };
 
 #endif

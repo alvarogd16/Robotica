@@ -251,6 +251,30 @@ DifferentialRobot.cpp.s:
 	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/DifferentialRobot.cpp.s
 .PHONY : DifferentialRobot.cpp.s
 
+FullPoseEstimation.o: FullPoseEstimation.cpp.o
+.PHONY : FullPoseEstimation.o
+
+# target to build an object file
+FullPoseEstimation.cpp.o:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/FullPoseEstimation.cpp.o
+.PHONY : FullPoseEstimation.cpp.o
+
+FullPoseEstimation.i: FullPoseEstimation.cpp.i
+.PHONY : FullPoseEstimation.i
+
+# target to preprocess a source file
+FullPoseEstimation.cpp.i:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/FullPoseEstimation.cpp.i
+.PHONY : FullPoseEstimation.cpp.i
+
+FullPoseEstimation.s: FullPoseEstimation.cpp.s
+.PHONY : FullPoseEstimation.s
+
+# target to generate assembly for a file
+FullPoseEstimation.cpp.s:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/FullPoseEstimation.cpp.s
+.PHONY : FullPoseEstimation.cpp.s
+
 GenericBase.o: GenericBase.cpp.o
 .PHONY : GenericBase.o
 
@@ -419,6 +443,30 @@ main.cpp.s:
 	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+opt/robocomp/classes/grid2d/grid.o: opt/robocomp/classes/grid2d/grid.cpp.o
+.PHONY : opt/robocomp/classes/grid2d/grid.o
+
+# target to build an object file
+opt/robocomp/classes/grid2d/grid.cpp.o:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/opt/robocomp/classes/grid2d/grid.cpp.o
+.PHONY : opt/robocomp/classes/grid2d/grid.cpp.o
+
+opt/robocomp/classes/grid2d/grid.i: opt/robocomp/classes/grid2d/grid.cpp.i
+.PHONY : opt/robocomp/classes/grid2d/grid.i
+
+# target to preprocess a source file
+opt/robocomp/classes/grid2d/grid.cpp.i:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/opt/robocomp/classes/grid2d/grid.cpp.i
+.PHONY : opt/robocomp/classes/grid2d/grid.cpp.i
+
+opt/robocomp/classes/grid2d/grid.s: opt/robocomp/classes/grid2d/grid.cpp.s
+.PHONY : opt/robocomp/classes/grid2d/grid.s
+
+# target to generate assembly for a file
+opt/robocomp/classes/grid2d/grid.cpp.s:
+	cd /home/alumno/G5-X1/Robotica/Practica4 && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/gotoxy.dir/build.make src/CMakeFiles/gotoxy.dir/opt/robocomp/classes/grid2d/grid.cpp.s
+.PHONY : opt/robocomp/classes/grid2d/grid.cpp.s
+
 opt/robocomp/classes/qlog/qlog.o: opt/robocomp/classes/qlog/qlog.cpp.o
 .PHONY : opt/robocomp/classes/qlog/qlog.o
 
@@ -560,6 +608,9 @@ help:
 	@echo "... DifferentialRobot.o"
 	@echo "... DifferentialRobot.i"
 	@echo "... DifferentialRobot.s"
+	@echo "... FullPoseEstimation.o"
+	@echo "... FullPoseEstimation.i"
+	@echo "... FullPoseEstimation.s"
 	@echo "... GenericBase.o"
 	@echo "... GenericBase.i"
 	@echo "... GenericBase.s"
@@ -581,6 +632,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... opt/robocomp/classes/grid2d/grid.o"
+	@echo "... opt/robocomp/classes/grid2d/grid.i"
+	@echo "... opt/robocomp/classes/grid2d/grid.s"
 	@echo "... opt/robocomp/classes/qlog/qlog.o"
 	@echo "... opt/robocomp/classes/qlog/qlog.i"
 	@echo "... opt/robocomp/classes/qlog/qlog.s"

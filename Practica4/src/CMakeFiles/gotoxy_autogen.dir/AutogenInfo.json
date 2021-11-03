@@ -79,9 +79,6 @@
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CheckCSourceCompiles.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/Internal/CheckSourceCompiles.cmake",
-		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CheckIncludeFile.c.in",
-		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CheckFunctionExists.c",
-		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/CheckFunctionExists.c",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageHandleStandardArgs.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindPackageMessage.cmake",
 		"/snap/clion/169/bin/cmake/linux/share/cmake-3.20/Modules/FindIce.cmake",
@@ -130,6 +127,12 @@
 			"/opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h",
 			"MU",
 			"WU3NUE3SBC/moc_abstract_graphic_viewer.cpp",
+			null
+		],
+		[
+			"/opt/robocomp/classes/grid2d/grid.h",
+			"MU",
+			"PUIT7MKCHX/moc_grid.cpp",
 			null
 		],
 		[
@@ -219,6 +222,7 @@
 	[
 		"/home/alumno/G5-X1/Robotica/Practica4/src/CommonBehavior.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/DifferentialRobot.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/GenericBase.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/Laser.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/ui_mainUI.h"
@@ -259,6 +263,7 @@
 			"MU",
 			null
 		],
+		[ "/opt/robocomp/classes/grid2d/grid.cpp", "MU", null ],
 		[ "/opt/robocomp/classes/qlog/qlog.cpp", "MU", null ],
 		[ "/opt/robocomp/classes/rapplication/rapplication.cpp", "MU", null ],
 		[ "/opt/robocomp/classes/sigwatch/sigwatch.cpp", "MU", null ]
@@ -269,6 +274,7 @@
 	[
 		"/home/alumno/G5-X1/Robotica/Practica4/src/CommonBehavior.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/DifferentialRobot.cpp",
+		"/home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/GenericBase.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/Laser.cpp",
 		"/home/alumno/G5-X1/Robotica/Practica4/src/mainUI.ui",
