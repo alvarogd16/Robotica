@@ -113,17 +113,6 @@ int SpecificWorker::startup_check()
 // RoboCompDifferentialRobot::TMechParams
 
 /**************************************/
-// From the RoboCompFullPoseEstimation you can call this methods:
-// this->fullposeestimation_proxy->getFullPoseEuler(...)
-// this->fullposeestimation_proxy->getFullPoseMatrix(...)
-// this->fullposeestimation_proxy->setInitialPose(...)
-
-/**************************************/
-// From the RoboCompFullPoseEstimation you can use this types:
-// RoboCompFullPoseEstimation::FullPoseMatrix
-// RoboCompFullPoseEstimation::FullPoseEuler
-
-/**************************************/
 // From the RoboCompLaser you can call this methods:
 // this->laser_proxy->getLaserAndBStateData(...)
 // this->laser_proxy->getLaserConfData(...)

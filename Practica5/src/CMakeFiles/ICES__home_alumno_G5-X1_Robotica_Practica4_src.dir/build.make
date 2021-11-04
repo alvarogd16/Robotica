@@ -71,6 +71,8 @@ ICES__home_alumno_G5-X1_Robotica_Practica4_src: src/CMakeFiles/ICES__home_alumno
 	cd /home/alumno/G5-X1/Robotica/Practica4/src && robocompdsl /opt/robocomp//interfaces/IDSLs/CommonBehavior.idsl /home/alumno/G5-X1/Robotica/Practica4/src/CommonBehavior.ice
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "BU robocompdsl /opt/robocomp//interfaces/IDSLs/DifferentialRobot.idsl /home/alumno/G5-X1/Robotica/Practica4/src/DifferentialRobot.ice"
 	cd /home/alumno/G5-X1/Robotica/Practica4/src && robocompdsl /opt/robocomp//interfaces/IDSLs/DifferentialRobot.idsl /home/alumno/G5-X1/Robotica/Practica4/src/DifferentialRobot.ice
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "BU robocompdsl /opt/robocomp//interfaces/IDSLs/FullPoseEstimation.idsl /home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.ice"
+	cd /home/alumno/G5-X1/Robotica/Practica4/src && robocompdsl /opt/robocomp//interfaces/IDSLs/FullPoseEstimation.idsl /home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.ice
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "BU robocompdsl /opt/robocomp//interfaces/IDSLs/GenericBase.idsl /home/alumno/G5-X1/Robotica/Practica4/src/GenericBase.ice"
 	cd /home/alumno/G5-X1/Robotica/Practica4/src && robocompdsl /opt/robocomp//interfaces/IDSLs/GenericBase.idsl /home/alumno/G5-X1/Robotica/Practica4/src/GenericBase.ice
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "BU robocompdsl /opt/robocomp//interfaces/IDSLs/Laser.idsl /home/alumno/G5-X1/Robotica/Practica4/src/Laser.ice"

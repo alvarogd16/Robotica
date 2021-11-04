@@ -218,6 +218,15 @@
 		<Unit filename="/home/alumno/G5-X1/Robotica/Practica4/src/DifferentialRobot.h">
 			<Option target="gotoxy"/>
 		</Unit>
+		<Unit filename="/home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.cpp">
+			<Option target="gotoxy"/>
+		</Unit>
+		<Unit filename="/home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.cpp.rule">
+			<Option target="gotoxy"/>
+		</Unit>
+		<Unit filename="/home/alumno/G5-X1/Robotica/Practica4/src/FullPoseEstimation.h">
+			<Option target="gotoxy"/>
+		</Unit>
 		<Unit filename="/home/alumno/G5-X1/Robotica/Practica4/src/GenericBase.cpp">
 			<Option target="gotoxy"/>
 		</Unit>
@@ -279,6 +288,12 @@
 			<Option target="gotoxy"/>
 		</Unit>
 		<Unit filename="/opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h">
+			<Option target="gotoxy"/>
+		</Unit>
+		<Unit filename="/opt/robocomp/classes/grid2d/grid.cpp">
+			<Option target="gotoxy"/>
+		</Unit>
+		<Unit filename="/opt/robocomp/classes/grid2d/grid.h">
 			<Option target="gotoxy"/>
 		</Unit>
 		<Unit filename="/opt/robocomp/classes/qlog/qlog.cpp">
