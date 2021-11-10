@@ -57,15 +57,18 @@ private:
     QGraphicsRectItem *laser_in_robot_polygon;
 
     // GRID
-    const int TILE_SIZE = 100;
+    const int TILE_SIZE = 200;
     Grid grid;
 
     enum MoveStates_t {ADVANCE, TURN, BORDER, STOP} moveState;
 
     const int MAX_ADV_SPEED = 1000;
 
+    Eigen::Vector2f robotToWorld(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
     Eigen::Vector2f worldToRobot(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
+
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
+    void update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state);
 };
 
 #endif

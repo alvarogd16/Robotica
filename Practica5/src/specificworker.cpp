@@ -83,7 +83,7 @@ void SpecificWorker::initialize(int period)
     moveState = ADVANCE;
 
     grid.initialize(dimensions, TILE_SIZE, &viewer->scene, false);
-    grid.setVisited(grid.pointToGrid(0, 0), true);
+//    grid.add_hit(Eigen::Vector2f(0, 0));
 }
 
 void SpecificWorker::compute()
@@ -94,14 +94,15 @@ void SpecificWorker::compute()
         auto r_state = fullposeestimation_proxy->getFullPoseEuler();
         robot_polygon->setRotation(r_state.rz*180/M_PI);
         robot_polygon->setPos(r_state.x, r_state.y);
+
+        // Leer y pintar laser
+        auto ldata = laser_proxy->getLaserData();
+        draw_laser(ldata);
+
+        update_map(ldata, r_state);
+
     }
     catch(const Ice::Exception &e){ std::cout << e.what() << std::endl;}
-
-
-    // Leer y pintar laser
-    auto ldata = laser_proxy->getLaserData();
-    draw_laser(ldata);
-
 
     switch(moveState) {
         case ADVANCE:
@@ -143,6 +144,13 @@ Eigen::Vector2f SpecificWorker::worldToRobot(Eigen::Vector2f p_world, Eigen::Vec
     return m_rotation * (p_world - p_robot);
 }
 
+Eigen::Vector2f SpecificWorker::robotToWorld(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle) {
+    Eigen::Matrix2f m_rotation;
+    m_rotation << cos(angle), -sin(angle), sin(angle), cos(angle);
+
+    return m_rotation * p_world + p_robot;
+}
+
 void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot coordinates
 {
     static QGraphicsItem *laser_polygon = nullptr;
@@ -167,6 +175,25 @@ void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot
     color.setAlpha(40);
     laser_polygon = viewer->scene.addPolygon(laser_in_robot_polygon->mapToScene(poly), QPen(QColor("DarkGreen"), 30), QBrush(color));
     laser_polygon->setZValue(3);
+}
+
+void SpecificWorker::update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state) {
+    for(auto &p : ldata) {
+        // Paso las coordenadas polares del fin del laser a cartesianas
+        Eigen::Vector2f puntoFinal = Eigen::Vector2f(p.dist * sin(p.angle), p.dist * cos(p.angle));
+
+        // (1 - l) * origenR + l * finL
+        int num_pasos = p.dist / (TILE_SIZE / 2);
+        float paso = 1/num_pasos;
+        for(float i = 0; i < num_pasos-1; i += paso) {
+            auto puntoIntermedio_R = Eigen::Vector2f(i * puntoFinal.x(), i * puntoFinal.y());
+            auto puntoIntermedio_W = robotToWorld(puntoIntermedio_R, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz*180/M_PI);
+
+            grid.add_miss(puntoIntermedio_W);
+        }
+        if(p.dist < 4000)
+            grid.add_hit(robotToWorld(puntoFinal, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz*180/M_PI));
+    }
 }
 
 /**************************************/
