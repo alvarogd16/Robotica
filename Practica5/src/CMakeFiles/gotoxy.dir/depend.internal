@@ -1649,6 +1649,7 @@ src/CMakeFiles/gotoxy.dir/gotoxy_autogen/mocs_compilation.cpp.o
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwaitcondition.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwineventnotifier.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qxmlstream.h
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/QColor
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix3x3
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix4x4
@@ -2124,6 +2125,7 @@ src/CMakeFiles/gotoxy.dir/home/alumno/robocomp/classes/grid2d/grid.cpp.o
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwaitcondition.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwineventnotifier.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qxmlstream.h
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/QColor
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QVector2D
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qbrush.h
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qcolor.h
@@ -2834,6 +2836,7 @@ src/CMakeFiles/gotoxy.dir/main.cpp.o
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwaitcondition.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwineventnotifier.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qxmlstream.h
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/QColor
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix3x3
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix4x4
@@ -3792,6 +3795,7 @@ src/CMakeFiles/gotoxy.dir/specificworker.cpp.o
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwaitcondition.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qwineventnotifier.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qxmlstream.h
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/QColor
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix3x3
  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMatrix4x4

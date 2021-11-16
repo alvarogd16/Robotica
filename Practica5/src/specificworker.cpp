@@ -17,6 +17,9 @@
  *    along with RoboComp.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "specificworker.h"
+#include <cppitertools/range.hpp>
+#include <cppitertools/sliding_window.hpp>
+#include <cppitertools/enumerate.hpp>
 
 /**
 * \brief Default constructor
@@ -80,8 +83,6 @@ void SpecificWorker::initialize(int period)
     catch(const Ice::Exception &e) { std::cout << e.what() << std::endl;}
     connect(viewer, &AbstractGraphicViewer::new_mouse_coordinates, this, &SpecificWorker::new_target_slot);
 
-    moveState = ADVANCE;
-
     grid.initialize(dimensions, TILE_SIZE, &viewer->scene, false);
 //    grid.add_hit(Eigen::Vector2f(0, 0));
 }
@@ -89,6 +90,7 @@ void SpecificWorker::initialize(int period)
 void SpecificWorker::compute()
 {
     // Leer y pintar robot
+    RoboCompLaser::TLaserData ldata;
     try
     {
         auto r_state = fullposeestimation_proxy->getFullPoseEuler();
@@ -96,36 +98,81 @@ void SpecificWorker::compute()
         robot_polygon->setPos(r_state.x, r_state.y);
 
         // Leer y pintar laser
-        auto ldata = laser_proxy->getLaserData();
+        ldata = laser_proxy->getLaserData();
         draw_laser(ldata);
-
         update_map(ldata, r_state);
-
     }
     catch(const Ice::Exception &e){ std::cout << e.what() << std::endl;}
 
-    switch(moveState) {
-        case ADVANCE:
+    float advance = 0, rot = 0;
+    int initial_num_doors  = doors.size();
+    float init_angle = 0;
+    switch(moveState)
+    {
+        case MoveStates_t::IDLE:
+            moveState = MoveStates_t::EXPLORE;
             break;
 
-        case TURN:
+        case MoveStates_t::INIT_TURN:
+            initial_num_doors = doors.size();
+            init_angle = r_state.rz;
+            moveState = MoveStates_t::EXPLORE;
             break;
 
-        case BORDER:
+        case MoveStates_t::EXPLORE:
+        {
+            if((init_angle + r_state.rz) > 2*M_PI)
+            {
+                // if no more doors found
+                if(doors.size() == initial_num_doors )
+                {
+                    moveState = MoveStates_t::GOTO_DOOR;
+                    break;
+                }
+            }
+            else
+            {
+                rot = 0.4;
+                advance = 0;
+                // build derivative
+                std::vector<float> dist_derivative(ldata.size());
+                for (auto &&[k, p]: iter::sliding_window(ldata, 2) | iter::enumerate)
+                    dist_derivative[k] = fabs(p[1].dist - p[0].dist);
+                auto first = std::ranges::max_element(dist_derivative);
+                dist_derivative.erase(first);
+                auto second = std::ranges::max_element(dist_derivative);
+                if (*first > 1000 and *second > 1000) {
+                    auto point_first = ldata.at(std::distance(dist_derivative.begin(), first));
+                    auto point_second = ldata.at(std::distance(dist_derivative.begin(), second));
+                    Eigen::Vector2f first_e(point_first.dist * sin(point_first.angle),
+                                            point_first.dist * sin(point_first.angle));
+                    Eigen::Vector2f second_e(point_second.dist * sin(point_second.angle),
+                                             point_second.dist * sin(point_second.angle));
+                    if ((first_e - second_e).norm() > 600 and (first_e - second_e).norm() < 1100)
+                    {
+                        b = Door();
+                        std::ranges::find_if(doors, [b](auto a){ return a == b;}
+                    })
+                }
+            }
+            break;
+        }
+        case MoveStates_t::GOTO_DOOR:
             break;
 
-        case STOP:
+        case MoveStates_t::GOTO_CENTER:
+            else
+                // find and store doors
+
             break;
     }
 
-
-    try {
-//        differentialrobot_proxy->setSpeedBase(vel, rot);
-    } catch (const Ice::Exception &e) {
-        std::cout << e.what() << std::endl;
-    }
+    try
+    {
+        differentialrobot_proxy->setSpeedBase(advance, rot);
+    } catch (const Ice::Exception &e) {std::cout << e.what() << std::endl;}
 }
-
+/////////////////////////////////////////////////////////////////////////////////
 int SpecificWorker::startup_check()
 {
 	std::cout << "Startup check" << std::endl;
@@ -133,7 +180,8 @@ int SpecificWorker::startup_check()
 	return 0;
 }
 
-void SpecificWorker::new_target_slot(QPointF point) {
+void SpecificWorker::new_target_slot(QPointF point)
+{
     qInfo() << point;
 }
 
@@ -177,22 +225,33 @@ void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot
     laser_polygon->setZValue(3);
 }
 
-void SpecificWorker::update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state) {
-    for(auto &p : ldata) {
-        // Paso las coordenadas polares del fin del laser a cartesianas
-        Eigen::Vector2f puntoFinal = Eigen::Vector2f(p.dist * sin(p.angle), p.dist * cos(p.angle));
+void SpecificWorker::update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state)
+{
+    for(const auto &l : ldata)
+    {
+        if(l.dist > 450/2.0)
+        {
+            Eigen::Vector2f tip(l.dist*sin(l.angle), l.dist*cos(l.angle));
+            Eigen::Vector2f p = robotToWorld(tip, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
+            int target_kx = (p.x() - grid.dim.left()) / grid.TILE_SIZE;
+            int target_kz = (p.y() - grid.dim.bottom()) / grid.TILE_SIZE;
+            int last_kx = -1000000;
+            int last_kz = -1000000;
 
-        // (1 - l) * origenR + l * finL
-        int num_pasos = p.dist / (TILE_SIZE / 2);
-        float paso = 1/num_pasos;
-        for(float i = 0; i < num_pasos-1; i += paso) {
-            auto puntoIntermedio_R = Eigen::Vector2f(i * puntoFinal.x(), i * puntoFinal.y());
-            auto puntoIntermedio_W = robotToWorld(puntoIntermedio_R, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz*180/M_PI);
-
-            grid.add_miss(puntoIntermedio_W);
+            int num_steps = ceil(l.dist/(TILE_SIZE/2.0));
+            for(const auto &&step : iter::range(0.0, 1.0-(1.0/num_steps), 1.0/num_steps))
+            {
+                Eigen::Vector2f p = robotToWorld(tip*step,Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
+                int kx = (p.x() - grid.dim.left()) / grid.TILE_SIZE;
+                int kz = (p.y() - grid.dim.bottom()) / grid.TILE_SIZE;
+                if(kx != last_kx and kx != target_kx and kz != last_kz and kz != target_kz)
+                    grid.add_miss(robotToWorld(tip * step, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
+                last_kx = kx;
+                last_kz = kz;
+            }
+            if(l.dist <= 4000)
+                grid.add_hit(robotToWorld(tip, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
         }
-        if(p.dist < 4000)
-            grid.add_hit(robotToWorld(puntoFinal, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz*180/M_PI));
     }
 }
 

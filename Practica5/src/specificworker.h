@@ -57,10 +57,11 @@ private:
     QGraphicsRectItem *laser_in_robot_polygon;
 
     // GRID
-    const int TILE_SIZE = 200;
+    const int TILE_SIZE = 100;
     Grid grid;
 
-    enum MoveStates_t {ADVANCE, TURN, BORDER, STOP} moveState;
+    enum class MoveStates_t {IDLE, EXPLORE, GOTO_DOOR, GOTO_CENTER, INIT_TURN};
+    MoveStates_t moveState = MoveStates_t::IDLE;
 
     const int MAX_ADV_SPEED = 1000;
 
@@ -69,6 +70,13 @@ private:
 
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
     void update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state);
+
+    struct Door
+    {
+        Eigen::Vector2f p1, p2;
+        operator ==(){};
+    };
+    std::vector<Door> doors;
 };
 
 #endif
