@@ -89,6 +89,8 @@ void SpecificWorker::initialize(int period)
 
 void SpecificWorker::compute()
 {
+    static QGraphicsItem *left_point_draw=nullptr, *right_point_draw=nullptr;
+
     // Leer y pintar robot
     RoboCompLaser::TLaserData ldata;
     RoboCompFullPoseEstimation::FullPoseEuler r_state;
@@ -148,7 +150,7 @@ void SpecificWorker::compute()
                 // y comparamos si son mayores que 1000 para saber si pueden llegar a ser puertas
                 auto first = std::ranges::max_element(dist_derivative);
                 float first_f = *first;
-                int first_pos = std::distance(dist_derivative.begin(), first-1);
+                int first_pos = std::distance(dist_derivative.begin(), first);
                 dist_derivative.erase(dist_derivative.begin() + first_pos);
 
                 auto second = std::ranges::max_element(dist_derivative);
@@ -156,7 +158,7 @@ void SpecificWorker::compute()
                 int second_pos = std::distance(dist_derivative.begin(), second+1);
 
                 qInfo() << first_f << second_f;
-                if (first_f > 1000 and second_f > 1000) {
+                if (first_f > 1000 and second_f > 2000) {
                     auto point_first = ldata.at(first_pos);
                     auto point_second = ldata.at(second_pos);
                     Eigen::Vector2f first_e(point_first.dist * sin(point_first.angle),
@@ -164,7 +166,12 @@ void SpecificWorker::compute()
                     Eigen::Vector2f second_e(point_second.dist * sin(point_second.angle),
                                              point_second.dist * sin(point_second.angle));
 
-
+                    // draw
+                    auto first_e_w = robotToWorld(first_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
+                    auto second_e_w = robotToWorld(second_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
+                    viewer->scene.removeItem(left_point_draw); viewer->scene.removeItem(right_point_draw);
+                    left_point_draw = viewer->scene.addRect(QRectF(first_e_w.x()-100,first_e_w.y()-100, 200, 200), QPen(QColor("DarkGreen"), 30), QBrush("DarkGreen"));
+                    right_point_draw = viewer->scene.addRect(QRectF(second_e_w.x()-100,second_e_w.y()-100, 200, 200), QPen(QColor("DarkGreen"), 30), QBrush("DarkGreen"));
 
                     // Si la diferencia entre los puntos es menor que 600 no entra el robot y si es mayor que 1100
                     // no se considera puerta sino espacio abierto
@@ -221,10 +228,6 @@ Eigen::Vector2f SpecificWorker::robotToWorld(Eigen::Vector2f p_world, Eigen::Vec
     m_rotation << cos(angle), -sin(angle), sin(angle), cos(angle);
 
     return m_rotation * p_world + p_robot;
-}
-
-void SpecificWorker::draw_point(Eigen::Vector2f p) {
-
 }
 
 void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot coordinates
