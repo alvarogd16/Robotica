@@ -91,9 +91,10 @@ void SpecificWorker::compute()
 {
     // Leer y pintar robot
     RoboCompLaser::TLaserData ldata;
+    RoboCompFullPoseEstimation::FullPoseEuler r_state;
     try
     {
-        auto r_state = fullposeestimation_proxy->getFullPoseEuler();
+        r_state = fullposeestimation_proxy->getFullPoseEuler();
         robot_polygon->setRotation(r_state.rz*180/M_PI);
         robot_polygon->setPos(r_state.x, r_state.y);
 
@@ -110,7 +111,7 @@ void SpecificWorker::compute()
     switch(moveState)
     {
         case MoveStates_t::IDLE:
-            moveState = MoveStates_t::EXPLORE;
+            moveState = MoveStates_t::INIT_TURN;
             break;
 
         case MoveStates_t::INIT_TURN:
@@ -121,55 +122,78 @@ void SpecificWorker::compute()
 
         case MoveStates_t::EXPLORE:
         {
+//            qInfo() << init_angle << r_state.rz;
             if((init_angle + r_state.rz) > 2*M_PI)
             {
                 // if no more doors found
                 if(doors.size() == initial_num_doors )
                 {
-                    moveState = MoveStates_t::GOTO_DOOR;
+                    moveState = MoveStates_t::IDLE;
                     break;
                 }
             }
             else
             {
-                rot = 0.4;
+                rot = 0;
                 advance = 0;
+
                 // build derivative
+                // Tenemos un vector que almacena las diferencias de distancias de dos puntos del lase (dist_derivate)
+                // este se rellena comparando las posiciones del laser de dos en dos (con la libreria iter)
                 std::vector<float> dist_derivative(ldata.size());
                 for (auto &&[k, p]: iter::sliding_window(ldata, 2) | iter::enumerate)
                     dist_derivative[k] = fabs(p[1].dist - p[0].dist);
+
+                // Guardas los dos primeros valores mas altos ( las distancias entre dos puntos más grande )
+                // y comparamos si son mayores que 1000 para saber si pueden llegar a ser puertas
                 auto first = std::ranges::max_element(dist_derivative);
-                dist_derivative.erase(first);
+                float first_f = *first;
+                int first_pos = std::distance(dist_derivative.begin(), first-1);
+                dist_derivative.erase(dist_derivative.begin() + first_pos);
+
                 auto second = std::ranges::max_element(dist_derivative);
-                if (*first > 1000 and *second > 1000) {
-                    auto point_first = ldata.at(std::distance(dist_derivative.begin(), first));
-                    auto point_second = ldata.at(std::distance(dist_derivative.begin(), second));
+                float second_f = *second;
+                int second_pos = std::distance(dist_derivative.begin(), second+1);
+
+                qInfo() << first_f << second_f;
+                if (first_f > 1000 and second_f > 1000) {
+                    auto point_first = ldata.at(first_pos);
+                    auto point_second = ldata.at(second_pos);
                     Eigen::Vector2f first_e(point_first.dist * sin(point_first.angle),
                                             point_first.dist * sin(point_first.angle));
                     Eigen::Vector2f second_e(point_second.dist * sin(point_second.angle),
                                              point_second.dist * sin(point_second.angle));
+
+
+
+                    // Si la diferencia entre los puntos es menor que 600 no entra el robot y si es mayor que 1100
+                    // no se considera puerta sino espacio abierto
+                    qInfo() << (first_e - second_e).norm();
                     if ((first_e - second_e).norm() > 600 and (first_e - second_e).norm() < 1100)
                     {
-                        b = Door();
-                        std::ranges::find_if(doors, [b](auto a){ return a == b;}
-                    })
+                        qInfo() << first_e.x() << first_e.y() << " Segunda: " << second_e.x() << second_e.y();
+
+                        Door b = Door{first_e, second_e};
+                        if(auto res = std::ranges::find_if_not(doors, [b](auto a){ return a == b;}); res == doors.end()) {
+                            doors.emplace_back(b);
+                        }
+                    }
                 }
             }
+            qInfo() << doors.size();
             break;
         }
         case MoveStates_t::GOTO_DOOR:
             break;
 
         case MoveStates_t::GOTO_CENTER:
-            else
                 // find and store doors
-
             break;
     }
 
     try
     {
-        differentialrobot_proxy->setSpeedBase(advance, rot);
+//        differentialrobot_proxy->setSpeedBase(advance, rot);
     } catch (const Ice::Exception &e) {std::cout << e.what() << std::endl;}
 }
 /////////////////////////////////////////////////////////////////////////////////
@@ -197,6 +221,10 @@ Eigen::Vector2f SpecificWorker::robotToWorld(Eigen::Vector2f p_world, Eigen::Vec
     m_rotation << cos(angle), -sin(angle), sin(angle), cos(angle);
 
     return m_rotation * p_world + p_robot;
+}
+
+void SpecificWorker::draw_point(Eigen::Vector2f p) {
+
 }
 
 void SpecificWorker::draw_laser(const RoboCompLaser::TLaserData &ldata) // robot coordinates

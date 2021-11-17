@@ -32,6 +32,7 @@
 #include "abstract_graphic_viewer/abstract_graphic_viewer.h"
 #include "grid2d/grid.h"
 #include <eigen3/Eigen/Eigen>
+#include <algorithm>
 
 class SpecificWorker : public GenericWorker
 {
@@ -74,7 +75,11 @@ private:
     struct Door
     {
         Eigen::Vector2f p1, p2;
-        operator ==(){};
+        bool operator==(const Door& d){
+            const int THRESHOLD = 300;
+            return ((p1 - d.p1).norm() < THRESHOLD and (p2 - d.p2).norm() < THRESHOLD)
+                or ((p1 - d.p2).norm() < THRESHOLD and (p2 - d.p1).norm() < THRESHOLD);
+        };
     };
     std::vector<Door> doors;
 };
