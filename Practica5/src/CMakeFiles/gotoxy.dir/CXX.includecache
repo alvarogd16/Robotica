@@ -30,7 +30,7 @@ eigen3/Eigen/Eigen
 algorithm
 -
 
-/home/alumno/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h
+/opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h
 QWidget
 -
 QGraphicsScene
@@ -54,7 +54,7 @@ QGraphicsPolygonItem
 iostream
 -
 
-/home/alumno/robocomp/classes/grid2d/grid.h
+/opt/robocomp/classes/grid2d/grid.h
 unordered_map
 -
 boost/functional/hash.hpp
@@ -81,12 +81,10 @@ Eigen/Dense
 -
 QVector2D
 -
-QColor
--
 
-/home/alumno/robocomp/classes/qlog/qlog.h
+/opt/robocomp/classes/qlog/qlog.h
 config.h
-/home/alumno/robocomp/classes/qlog/config.h
+/opt/robocomp/classes/qlog/config.h
 QtCore
 -
 iostream
@@ -2015,10 +2013,6 @@ QtCore/qvector.h
 -
 QtCore/qscopedpointer.h
 -
-
-/usr/include/x86_64-linux-gnu/qt5/QtGui/QColor
-qcolor.h
-/usr/include/x86_64-linux-gnu/qt5/QtGui/qcolor.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/QImage
 qimage.h

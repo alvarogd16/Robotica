@@ -158,20 +158,23 @@ void SpecificWorker::compute()
                 int second_pos = std::distance(dist_derivative.begin(), second+1);
 
                 qInfo() << first_f << second_f;
-                if (first_f > 1000 and second_f > 2000) {
+                if (first_f > 1000 and second_f > 1000) {
+                    first_pos = (first_pos == 0) ? first_pos : first_pos-1;
+                    second_pos = (second_pos == ldata.size()) ? second_pos : second_pos+1;
+
                     auto point_first = ldata.at(first_pos);
                     auto point_second = ldata.at(second_pos);
                     Eigen::Vector2f first_e(point_first.dist * sin(point_first.angle),
-                                            point_first.dist * sin(point_first.angle));
+                                            point_first.dist * cos(point_first.angle));
                     Eigen::Vector2f second_e(point_second.dist * sin(point_second.angle),
-                                             point_second.dist * sin(point_second.angle));
+                                             point_second.dist * cos(point_second.angle));
 
                     // draw
                     auto first_e_w = robotToWorld(first_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
                     auto second_e_w = robotToWorld(second_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
                     viewer->scene.removeItem(left_point_draw); viewer->scene.removeItem(right_point_draw);
-                    left_point_draw = viewer->scene.addRect(QRectF(first_e_w.x()-100,first_e_w.y()-100, 200, 200), QPen(QColor("DarkGreen"), 30), QBrush("DarkGreen"));
-                    right_point_draw = viewer->scene.addRect(QRectF(second_e_w.x()-100,second_e_w.y()-100, 200, 200), QPen(QColor("DarkGreen"), 30), QBrush("DarkGreen"));
+                    left_point_draw = viewer->scene.addRect(QRectF(first_e_w.x()-100,first_e_w.y()-100, 200, 200), QPen(QColor("Green"), 30), QBrush("Green"));
+                    right_point_draw = viewer->scene.addRect(QRectF(second_e_w.x()-100,second_e_w.y()-100, 200, 200), QPen(QColor("Yellow"), 30), QBrush("Yellow"));
 
                     // Si la diferencia entre los puntos es menor que 600 no entra el robot y si es mayor que 1100
                     // no se considera puerta sino espacio abierto
