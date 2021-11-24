@@ -20,7 +20,7 @@
 #include <cppitertools/range.hpp>
 #include <cppitertools/sliding_window.hpp>
 #include <cppitertools/enumerate.hpp>
-
+#include <cppitertools/combinations_with_replacement.hpp>
 /**
 * \brief Default constructor
 */
@@ -69,7 +69,7 @@ void SpecificWorker::initialize(int period)
 	{
 		timer.start(Period);
 	}
-    QRect dimensions(-5000, -2500, 10000, 5000);
+    QRect dimensions(-5100, -2600, 10200, 5200);
     viewer = new AbstractGraphicViewer(this, dimensions);
     this->resize(900,450);
     robot_polygon = viewer->add_robot(ROBOT_LENGTH);
@@ -109,6 +109,7 @@ void SpecificWorker::compute()
 
     float advance = 0, rot = 0;
     int initial_num_doors  = doors.size();
+    static int current_room = 0;
     float init_angle = 0;
     switch(moveState)
     {
@@ -124,73 +125,61 @@ void SpecificWorker::compute()
 
         case MoveStates_t::EXPLORE:
         {
-//            qInfo() << init_angle << r_state.rz;
-            if((init_angle + r_state.rz) > 2*M_PI)
+            float current = (r_state.rz < 0) ? (2 * M_PI + r_state.rz) : r_state.rz;
+            if (fabs(current - init_angle) < (M_PI + 0.1) and fabs(current - init_angle) > (M_PI - 0.1))
             {
-                // if no more doors found
-                if(doors.size() == initial_num_doors )
+                try
+                { differentialrobot_proxy->setSpeedBase(0.0, 0.0); }
+                catch (const Ice::Exception &e)
+                { std::cout << e.what() << std::endl; }
+               // state = State::ESTIMATE;
+            }
+            // search for corners
+            // compute derivative wrt distance
+            std::vector<float> derivatives(ldata.size());
+            derivatives[0] = 0;
+            for (const auto &&[k, l]: iter::sliding_window(ldata, 2) | iter::enumerate)
+                derivatives[k + 1] = l[1].dist - l[0].dist;
+
+            // filter derivatives greater than a threshold
+            std::vector<Eigen::Vector2f> peaks;
+            for (const auto &&[k, der]: iter::enumerate(derivatives))
+            {
+                if (der > 1000)
                 {
-                    moveState = MoveStates_t::IDLE;
-                    break;
+                    const auto &l = ldata.at(k - 1);
+                    peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
+                } else if (der < -1000)
+                {
+                    const auto &l = ldata.at(k);
+                    peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
                 }
             }
-            else
+            qInfo() << __FUNCTION__ << "peaks " << peaks.size();
+
+            // pairwise comparison of peaks to filter in doors
+            for (auto &&c: iter::combinations_with_replacement(peaks, 2))
             {
-                rot = 0;
-                advance = 0;
-
-                // build derivative
-                // Tenemos un vector que almacena las diferencias de distancias de dos puntos del lase (dist_derivate)
-                // este se rellena comparando las posiciones del laser de dos en dos (con la libreria iter)
-                std::vector<float> dist_derivative(ldata.size());
-                for (auto &&[k, p]: iter::sliding_window(ldata, 2) | iter::enumerate)
-                    dist_derivative[k] = fabs(p[1].dist - p[0].dist);
-
-                // Guardas los dos primeros valores mas altos ( las distancias entre dos puntos más grande )
-                // y comparamos si son mayores que 1000 para saber si pueden llegar a ser puertas
-                auto first = std::ranges::max_element(dist_derivative);
-                float first_f = *first;
-                int first_pos = std::distance(dist_derivative.begin(), first);
-                dist_derivative.erase(dist_derivative.begin() + first_pos);
-
-                auto second = std::ranges::max_element(dist_derivative);
-                float second_f = *second;
-                int second_pos = std::distance(dist_derivative.begin(), second+1);
-
-                qInfo() << first_f << second_f;
-                if (first_f > 1000 and second_f > 1000) {
-                    first_pos = (first_pos == 0) ? first_pos : first_pos-1;
-                    second_pos = (second_pos == ldata.size()) ? second_pos : second_pos+1;
-
-                    auto point_first = ldata.at(first_pos);
-                    auto point_second = ldata.at(second_pos);
-                    Eigen::Vector2f first_e(point_first.dist * sin(point_first.angle),
-                                            point_first.dist * cos(point_first.angle));
-                    Eigen::Vector2f second_e(point_second.dist * sin(point_second.angle),
-                                             point_second.dist * cos(point_second.angle));
-
-                    // draw
-                    auto first_e_w = robotToWorld(first_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
-                    auto second_e_w = robotToWorld(second_e, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz);
-                    viewer->scene.removeItem(left_point_draw); viewer->scene.removeItem(right_point_draw);
-                    left_point_draw = viewer->scene.addRect(QRectF(first_e_w.x()-100,first_e_w.y()-100, 200, 200), QPen(QColor("Green"), 30), QBrush("Green"));
-                    right_point_draw = viewer->scene.addRect(QRectF(second_e_w.x()-100,second_e_w.y()-100, 200, 200), QPen(QColor("Yellow"), 30), QBrush("Yellow"));
-
-                    // Si la diferencia entre los puntos es menor que 600 no entra el robot y si es mayor que 1100
-                    // no se considera puerta sino espacio abierto
-                    qInfo() << (first_e - second_e).norm();
-                    if ((first_e - second_e).norm() > 600 and (first_e - second_e).norm() < 1100)
-                    {
-                        qInfo() << first_e.x() << first_e.y() << " Segunda: " << second_e.x() << second_e.y();
-
-                        Door b = Door{first_e, second_e};
-                        if(auto res = std::ranges::find_if_not(doors, [b](auto a){ return a == b;}); res == doors.end()) {
-                            doors.emplace_back(b);
-                        }
-                    }
+                qInfo() << __FUNCTION__ << "dist " << (c[0] - c[1]).norm();
+                if ((c[0] - c[1]).norm() < 1100 and (c[0] - c[1]).norm() > 650)
+                {
+                    Door d{c[0], c[1]};
+                    d.to_rooms.insert(current_room);
+                    if (auto r = std::find_if(doors.begin(), doors.end(), [d](auto a) { return d == a; }); r == doors.end())
+                        doors.emplace_back(d);
                 }
             }
-            qInfo() << doors.size();
+
+            // draw
+            qInfo() << __FUNCTION__ << "---------- doors" << doors.size();
+            static std::vector<QGraphicsItem *> door_lines;
+            for (auto dp: door_lines) viewer->scene.removeItem(dp);
+            door_lines.clear();
+            for (const auto r: doors)
+            {
+                door_lines.push_back(viewer->scene.addLine(r.p1.x(), r.p1.y(), r.p2.x(), r.p2.y(), QPen(QColor("Magenta"), 100)));
+                door_lines.back()->setZValue(200);
+            }
             break;
         }
         case MoveStates_t::GOTO_DOOR:
