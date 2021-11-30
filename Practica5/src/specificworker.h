@@ -61,7 +61,7 @@ private:
     const int TILE_SIZE = 100;
     Grid grid;
 
-    enum class MoveStates_t {IDLE, EXPLORE, GOTO_DOOR, GOTO_CENTER, INIT_TURN};
+    enum class MoveStates_t {IDLE, EXPLORE, SELECT_DOOR, GOTO_DOOR, GOTO_CENTER, INIT_TURN};
     MoveStates_t moveState = MoveStates_t::IDLE;
 
     const int MAX_ADV_SPEED = 1000;
@@ -75,6 +75,8 @@ private:
     struct Door
     {
         Eigen::Vector2f p1, p2;
+        Eigen::Vector2f midpoint(){return p1 + ((p2-p1)/2.0);};
+        // Guarda las habitaciones que conecta la puerta. Se inicializan a -1 al no estar visitadas en un principio.
 		std::set<int> to_rooms;
         bool operator==(const Door& d){
             const int THRESHOLD = 300;
@@ -84,6 +86,7 @@ private:
 
     };
     std::vector<Door> doors;
+    Door selectedDoor;
 };
 
 #endif

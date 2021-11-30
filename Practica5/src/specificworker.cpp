@@ -107,24 +107,23 @@ void SpecificWorker::compute()
     }
     catch(const Ice::Exception &e){ std::cout << e.what() << std::endl;}
 
-    float advance = 0, rot = 0;
+    float advance = 0, rot = 0.5;
     int initial_num_doors  = doors.size();
     static int current_room = 0;
     float init_angle = 0;
     switch(moveState)
     {
-        case MoveStates_t::IDLE:
+        case MoveStates_t::IDLE:{
             moveState = MoveStates_t::INIT_TURN;
-            break;
+            break;}
 
-        case MoveStates_t::INIT_TURN:
+        case MoveStates_t::INIT_TURN:{
             initial_num_doors = doors.size();
-            init_angle = r_state.rz;
+            init_angle = (r_state.rz < 0) ? (2 * M_PI + r_state.rz) : r_state.rz;
             moveState = MoveStates_t::EXPLORE;
-            break;
+            break;}
 
-        case MoveStates_t::EXPLORE:
-        {
+        case MoveStates_t::EXPLORE:{
             float current = (r_state.rz < 0) ? (2 * M_PI + r_state.rz) : r_state.rz;
             if (fabs(current - init_angle) < (M_PI + 0.1) and fabs(current - init_angle) > (M_PI - 0.1))
             {
@@ -132,7 +131,7 @@ void SpecificWorker::compute()
                 { differentialrobot_proxy->setSpeedBase(0.0, 0.0); }
                 catch (const Ice::Exception &e)
                 { std::cout << e.what() << std::endl; }
-               // state = State::ESTIMATE;
+                    moveState = MoveStates_t::GOTO_DOOR;
             }
             // search for corners
             // compute derivative wrt distance
@@ -180,19 +179,46 @@ void SpecificWorker::compute()
                 door_lines.push_back(viewer->scene.addLine(r.p1.x(), r.p1.y(), r.p2.x(), r.p2.y(), QPen(QColor("Magenta"), 100)));
                 door_lines.back()->setZValue(200);
             }
-            break;
-        }
-        case MoveStates_t::GOTO_DOOR:
-            break;
+            break;}
 
-        case MoveStates_t::GOTO_CENTER:
+        case MoveStates_t::SELECT_DOOR:{
+            // Seleccionar una puerta
+            std::vector<Door> doorsToGo;
+            auto gen = std::mt19937{std::random_device{}()};
+            for(Door &d : doors) {
+                for(const auto &to_r : d.to_rooms)
+                    if(to_r == current_room)
+                        doorsToGo.push_back(d);
+            }
+
+            if(doorsToGo.empty()) {
+                qInfo() << "Todas las puertas visitadas";
+                moveState = MoveStates_t::IDLE;
+            } else {
+                selectedDoor = doorsToGo.front();
+
+                qInfo() << "Room to go " << *selectedDoor.to_rooms.begin();
+                moveState = MoveStates_t::GOTO_DOOR;
+            }
+            break;}
+
+
+        case MoveStates_t::GOTO_DOOR:{
+            //Avanza hacia la puerta
+            //Importante avanzar hacia el centro para no golpear las paredes
+            auto midPoint = selectedDoor.midpoint();
+            qInfo() << "Punto medio entre las puertas: " << midPoint.x() << " " << midPoint.y();
+
+            break;}
+
+        case MoveStates_t::GOTO_CENTER:{
                 // find and store doors
-            break;
+            break;}
     }
 
     try
     {
-//        differentialrobot_proxy->setSpeedBase(advance, rot);
+        differentialrobot_proxy->setSpeedBase(advance, rot);
     } catch (const Ice::Exception &e) {std::cout << e.what() << std::endl;}
 }
 /////////////////////////////////////////////////////////////////////////////////
