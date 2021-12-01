@@ -51,7 +51,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/opt/robocomp/etc-default" TYPE FILE RENAME "gotoxy.conf" FILES "/home/alumno/Documentos/G5-X1/Robotica/Practica5/etc/config")
+  file(INSTALL DESTINATION "/opt/robocomp/etc-default" TYPE FILE RENAME "gotoxy.conf" FILES "/home/alumno/Documentos/G5-X1/Robotica/Practica5/etc/config")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

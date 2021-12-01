@@ -131,7 +131,7 @@ void SpecificWorker::compute()
                 { differentialrobot_proxy->setSpeedBase(0.0, 0.0); }
                 catch (const Ice::Exception &e)
                 { std::cout << e.what() << std::endl; }
-                    moveState = MoveStates_t::GOTO_DOOR;
+                    moveState = MoveStates_t::SELECT_DOOR;
             }
             // search for corners
             // compute derivative wrt distance
@@ -160,7 +160,7 @@ void SpecificWorker::compute()
             for (auto &&c: iter::combinations_with_replacement(peaks, 2))
             {
                 qInfo() << __FUNCTION__ << "dist " << (c[0] - c[1]).norm();
-                if ((c[0] - c[1]).norm() < 1100 and (c[0] - c[1]).norm() > 650)
+                if ((c[0] - c[1]).norm() < 1100 and (c[0] - c[1]).norm() > 500)
                 {
                     Door d{c[0], c[1]};
                     d.to_rooms.insert(current_room);
@@ -195,9 +195,22 @@ void SpecificWorker::compute()
                 qInfo() << "Todas las puertas visitadas";
                 moveState = MoveStates_t::IDLE;
             } else {
-                selectedDoor = doorsToGo.front();
+                selectedDoor = doorsToGo.back();
 
-                qInfo() << "Room to go " << *selectedDoor.to_rooms.begin();
+                qInfo() << "Room i'am " << *selectedDoor.to_rooms.begin();
+
+                float aux_p1_x = selectedDoor.get_midpoint().x();
+                float aux_p1_y = selectedDoor.get_midpoint().y();
+
+                qInfo() << "Puntos puerta" << selectedDoor.p1.x() << selectedDoor.p1.y() << selectedDoor.p2.x() << selectedDoor.p2.y();
+                qInfo() << "Punto medio" << aux_p1_x << aux_p1_y;
+
+                auto p = viewer->scene.addRect(QRectF(aux_p1_x-100, aux_p1_y-100, 200, 200), QPen(QColor("Blue"), 30), QBrush("Blue"));
+                p->setZValue(200);
+
+                target.point = QPointF(selectedDoor.get_midpoint().x(), selectedDoor.get_midpoint().y());
+                target.activo = true;
+
                 moveState = MoveStates_t::GOTO_DOOR;
             }
             break;}
@@ -206,13 +219,34 @@ void SpecificWorker::compute()
         case MoveStates_t::GOTO_DOOR:{
             //Avanza hacia la puerta
             //Importante avanzar hacia el centro para no golpear las paredes
-            auto midPoint = selectedDoor.midpoint();
-            qInfo() << "Punto medio entre las puertas: " << midPoint.x() << " " << midPoint.y();
+
+            if(target.activo) {
+                calculateDistRot(advance, rot, r_state);
+            } else {
+                advance = 0;
+                rot = 0;
+                qInfo() << "Ha llegado a la mitad de la puerta";
+
+                target.point = QPointF(selectedDoor.get_external_midpoint().x(), selectedDoor.get_external_midpoint().y());
+                target.activo = true;
+                current_room+=1;
+                moveState = MoveStates_t::GOTO_CENTER;
+            }
 
             break;}
 
         case MoveStates_t::GOTO_CENTER:{
                 // find and store doors
+
+                if(target.activo)
+                    calculateDistRot(advance, rot, r_state);
+                else {
+                    advance = 0;
+                    rot = 0;
+                    qInfo() << "Ha llegado a la 'mitad' de la habitación";
+
+                    moveState = MoveStates_t::INIT_TURN;
+                }
             break;}
     }
 
@@ -300,6 +334,44 @@ void SpecificWorker::update_map(const RoboCompLaser::TLaserData &ldata, RoboComp
             }
             if(l.dist <= 4000)
                 grid.add_hit(robotToWorld(tip, Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
+        }
+    }
+}
+
+
+float SpecificWorker::reduce_speed_if_turning(float angle) {
+    return std::exp(-std::pow(angle, 2) / 0.02714);
+}
+
+float SpecificWorker::reduce_speed_if_close_to_target(float dist) {
+    if(dist >= 1000)
+        return 1;
+    else
+        return dist / 1000;
+}
+
+void SpecificWorker::calculateDistRot(float &vel, float &rot, RoboCompFullPoseEstimation::FullPoseEuler bState) {
+    float dist, angle;
+
+    // Pasar target a robot coord
+    Eigen::Vector2f p_world(target.point.x(), target.point.y());
+    Eigen::Vector2f p_robot(bState.x, bState.y);
+    Eigen::Vector2f target_robot = worldToRobot(p_world, p_robot, bState.rz);
+
+    // Calcular angulo entre robot y target
+    angle = atan2(-target_robot.y(), target_robot.x()) + M_PI_2;
+    rot = angle;
+
+    // Calcular velocidad de avance
+    dist = sqrt(pow(target_robot.x(), 2) + pow(target_robot.y(), 2));
+    vel = 1000 * reduce_speed_if_turning(angle) * reduce_speed_if_close_to_target(dist);
+
+    if(angle < 0.2 && angle > -0.2) {
+        if(dist < 300) {
+            std::cout << "Parado" << std::endl;
+            vel = 0;
+            rot = 0;
+            target.activo = false;
         }
     }
 }

@@ -249,6 +249,9 @@
 		<Unit filename="/home/alumno/Documentos/G5-X1/Robotica/Practica5/src/genericworker.h">
 			<Option target="gotoxy"/>
 		</Unit>
+		<Unit filename="/home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/include/ui_mainUI.h">
+			<Option target="gotoxy"/>
+		</Unit>
 		<Unit filename="/home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/mocs_compilation.cpp">
 			<Option target="gotoxy"/>
 		</Unit>

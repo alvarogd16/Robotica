@@ -64,6 +64,11 @@ private:
     enum class MoveStates_t {IDLE, EXPLORE, SELECT_DOOR, GOTO_DOOR, GOTO_CENTER, INIT_TURN};
     MoveStates_t moveState = MoveStates_t::IDLE;
 
+    struct Target_t {
+        QPointF point;
+        bool activo = false;
+    } target;
+
     const int MAX_ADV_SPEED = 1000;
 
     Eigen::Vector2f robotToWorld(Eigen::Vector2f p_world, Eigen::Vector2f p_robot, float angle);
@@ -72,14 +77,26 @@ private:
     void draw_laser(const RoboCompLaser::TLaserData &ldata);
     void update_map(const RoboCompLaser::TLaserData &ldata, RoboCompFullPoseEstimation::FullPoseEuler r_state);
 
+
+    float reduce_speed_if_turning(float angle);
+    float reduce_speed_if_close_to_target(float dist);
+    void calculateDistRot(float &vel, float &rot, RoboCompFullPoseEstimation::FullPoseEuler bState);
+
     struct Door
     {
         Eigen::Vector2f p1, p2;
-        Eigen::Vector2f midpoint(){return p1 + ((p2-p1)/2.0);};
+        Eigen::Vector2f get_midpoint() const {return p1 + ((p2-p1)/2.0);};
+        Eigen::Vector2f get_external_midpoint() const
+        {
+            Eigen::ParametrizedLine<float, 2> r =  Eigen::ParametrizedLine<float, 2>(get_midpoint(), (p1-p2).unitOrthogonal());
+            //qInfo() << __FUNCTION__ << r.pointAt(800.0).x() << r.pointAt(800.0).y();
+            return r.pointAt(1700.0);
+        };
+
         // Guarda las habitaciones que conecta la puerta. Se inicializan a -1 al no estar visitadas en un principio.
 		std::set<int> to_rooms;
         bool operator==(const Door& d){
-            const int THRESHOLD = 300;
+            const int THRESHOLD = 500;
             return ((p1 - d.p1).norm() < THRESHOLD and (p2 - d.p2).norm() < THRESHOLD)
                 or ((p1 - d.p2).norm() < THRESHOLD and (p2 - d.p1).norm() < THRESHOLD);
         };
