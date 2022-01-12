@@ -1,0 +1,15 @@
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/install/strip.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/install/local.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/list_install_components.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/CMakeFiles/install.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/install/strip.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/install/local.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/install.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/list_install_components.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/gotoxy.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/ICES__home_alumno_Documentos_G5-X1_Robotica_Practica5_src.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/alumno/Documentos/G5-X1/Robotica/Practica5/cmake-build-debug/src/CMakeFiles/gotoxy_autogen.dir

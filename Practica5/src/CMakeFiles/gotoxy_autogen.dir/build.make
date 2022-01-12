@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/175/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/178/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/175/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/178/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ include src/CMakeFiles/gotoxy_autogen.dir/progress.make
 
 src/CMakeFiles/gotoxy_autogen:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/alumno/Documentos/G5-X1/Robotica/Practica5/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target gotoxy"
-	cd /home/alumno/Documentos/G5-X1/Robotica/Practica5/src && /snap/clion/175/bin/cmake/linux/bin/cmake -E cmake_autogen /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/CMakeFiles/gotoxy_autogen.dir/AutogenInfo.json Debug
+	cd /home/alumno/Documentos/G5-X1/Robotica/Practica5/src && /snap/clion/178/bin/cmake/linux/bin/cmake -E cmake_autogen /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/CMakeFiles/gotoxy_autogen.dir/AutogenInfo.json Debug
 
 gotoxy_autogen: src/CMakeFiles/gotoxy_autogen
 gotoxy_autogen: src/CMakeFiles/gotoxy_autogen.dir/build.make

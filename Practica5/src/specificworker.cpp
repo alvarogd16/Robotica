@@ -20,7 +20,7 @@
 #include <cppitertools/range.hpp>
 #include <cppitertools/sliding_window.hpp>
 #include <cppitertools/enumerate.hpp>
-#include <cppitertools/combinations_with_replacement.hpp>
+#include <cppitertools/combinations.hpp>
 /**
 * \brief Default constructor
 */
@@ -39,21 +39,6 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-//	THE FOLLOWING IS JUST AN EXAMPLE
-//	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
-//	try
-//	{
-//		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
-//		std::string innermodel_path = par.value;
-//		innerModel = std::make_shared(innermodel_path);
-//	}
-//	catch(const std::exception &e) { qFatal("Error reading config params"); }
-
-
-
-
-
-
 	return true;
 }
 
@@ -114,7 +99,9 @@ void SpecificWorker::compute()
     switch(moveState)
     {
         case MoveStates_t::IDLE:{
-            moveState = MoveStates_t::INIT_TURN;
+            advance = 0;
+            rot = 0;
+            // moveState = MoveStates_t::INIT_TURN;
             break;}
 
         case MoveStates_t::INIT_TURN:{
@@ -124,6 +111,7 @@ void SpecificWorker::compute()
             break;}
 
         case MoveStates_t::EXPLORE:{
+            // Da vueltas en busca de puertas, si hace vuelta completa
             float current = (r_state.rz < 0) ? (2 * M_PI + r_state.rz) : r_state.rz;
             if (fabs(current - init_angle) < (M_PI + 0.1) and fabs(current - init_angle) > (M_PI - 0.1))
             {
@@ -131,58 +119,39 @@ void SpecificWorker::compute()
                 { differentialrobot_proxy->setSpeedBase(0.0, 0.0); }
                 catch (const Ice::Exception &e)
                 { std::cout << e.what() << std::endl; }
-                    moveState = MoveStates_t::SELECT_DOOR;
-            }
-            // search for corners
-            // compute derivative wrt distance
-            std::vector<float> derivatives(ldata.size());
-            derivatives[0] = 0;
-            for (const auto &&[k, l]: iter::sliding_window(ldata, 2) | iter::enumerate)
-                derivatives[k + 1] = l[1].dist - l[0].dist;
 
-            // filter derivatives greater than a threshold
-            std::vector<Eigen::Vector2f> peaks;
-            for (const auto &&[k, der]: iter::enumerate(derivatives))
-            {
-                if (der > 1000)
-                {
-                    const auto &l = ldata.at(k - 1);
-                    peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
-                } else if (der < -1000)
-                {
-                    const auto &l = ldata.at(k);
-                    peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
-                }
+                moveState = MoveStates_t::SELECT_DOOR;
             }
+
+
+            std::vector<Eigen::Vector2f> peaks = get_peaks(ldata, r_state);
             qInfo() << __FUNCTION__ << "peaks " << peaks.size();
 
+
             // pairwise comparison of peaks to filter in doors
-            for (auto &&c: iter::combinations_with_replacement(peaks, 2))
+            for (auto &&c: iter::combinations(peaks, 2))
             {
                 qInfo() << __FUNCTION__ << "dist " << (c[0] - c[1]).norm();
                 if ((c[0] - c[1]).norm() < 1100 and (c[0] - c[1]).norm() > 500)
                 {
+                    // Crea la puerta con los
                     Door d{c[0], c[1]};
                     d.to_rooms.insert(current_room);
+
+
                     if (auto r = std::find_if(doors.begin(), doors.end(), [d](auto a) { return d == a; }); r == doors.end())
                         doors.emplace_back(d);
                 }
             }
 
-            // draw
-            qInfo() << __FUNCTION__ << "---------- doors" << doors.size();
-            static std::vector<QGraphicsItem *> door_lines;
-            for (auto dp: door_lines) viewer->scene.removeItem(dp);
-            door_lines.clear();
-            for (const auto r: doors)
-            {
-                door_lines.push_back(viewer->scene.addLine(r.p1.x(), r.p1.y(), r.p2.x(), r.p2.y(), QPen(QColor("Magenta"), 100)));
-                door_lines.back()->setZValue(200);
-            }
+            draw_peaks(peaks);
+            draw_doors();
+
             break;}
 
         case MoveStates_t::SELECT_DOOR:{
             // Seleccionar una puerta
+
             std::vector<Door> doorsToGo;
             auto gen = std::mt19937{std::random_device{}()};
             for(Door &d : doors) {
@@ -205,15 +174,49 @@ void SpecificWorker::compute()
                 qInfo() << "Puntos puerta" << selectedDoor.p1.x() << selectedDoor.p1.y() << selectedDoor.p2.x() << selectedDoor.p2.y();
                 qInfo() << "Punto medio" << aux_p1_x << aux_p1_y;
 
-                auto p = viewer->scene.addRect(QRectF(aux_p1_x-100, aux_p1_y-100, 200, 200), QPen(QColor("Blue"), 30), QBrush("Blue"));
-                p->setZValue(200);
+                draw_door_midpoint(selectedDoor);
 
-                target.point = QPointF(selectedDoor.get_midpoint().x(), selectedDoor.get_midpoint().y());
+                target.point = QPointF(selectedDoor.get_point_closeDoor().x(), selectedDoor.get_point_closeDoor().y());
                 target.activo = true;
 
-                moveState = MoveStates_t::GOTO_DOOR;
+                moveState = MoveStates_t::GOTO_CLOSE_DOOR;
             }
-            break;}
+            break;
+        }
+
+        case MoveStates_t::GOTO_CLOSE_DOOR: {
+            // Seleccionar punto perpendicular al punto medio de la puerta y marcarlo como objetivo
+
+
+            // Ir a ese punto
+            if(target.activo)
+                calculateDistRot(advance, rot, r_state);
+            else {
+                qInfo() << "Ha llegado al punto cercano a la puerta";
+
+                moveState = MoveStates_t::REFINE_DOOR;
+            }
+
+            break;
+        }
+
+
+        case MoveStates_t::REFINE_DOOR: {
+            // Obtener picos con las derivadas
+            std::vector<Eigen::Vector2f> peaks = get_peaks(ldata, r_state);
+            // Redefinir la puerta con los puntos más cercanos a los anteriores
+            selectedDoor.refine_points(peaks);
+
+            target.point = QPointF(selectedDoor.get_external_midpoint().x(), selectedDoor.get_external_midpoint().y());
+            target.activo = true;
+
+            draw_door_midpoint(selectedDoor);
+
+            moveState = MoveStates_t::GOTO_DOOR;
+
+            break;
+        }
+
 
 
         case MoveStates_t::GOTO_DOOR:{
@@ -236,8 +239,6 @@ void SpecificWorker::compute()
             break;}
 
         case MoveStates_t::GOTO_CENTER:{
-                // find and store doors
-
                 if(target.activo)
                     calculateDistRot(advance, rot, r_state);
                 else {
@@ -374,6 +375,63 @@ void SpecificWorker::calculateDistRot(float &vel, float &rot, RoboCompFullPoseEs
             target.activo = false;
         }
     }
+}
+
+std::vector<Eigen::Vector2f> SpecificWorker::get_peaks(auto ldata, auto r_state) {
+    // search for corners
+    // compute derivative wrt distance
+    std::vector<float> derivatives(ldata.size());
+    derivatives[0] = 0;
+    for (const auto &&[k, l]: iter::sliding_window(ldata, 2) | iter::enumerate)
+        derivatives[k + 1] = l[1].dist - l[0].dist;
+
+    // filter derivatives greater than a threshold
+    std::vector<Eigen::Vector2f> peaks;
+    for (const auto &&[k, der]: iter::enumerate(derivatives))
+    {
+        if (der > 800) // 950
+        {
+            const auto &l = ldata.at(k - 1);
+            peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
+        } else if (der < -800)
+        {
+            const auto &l = ldata.at(k);
+            peaks.push_back(robotToWorld(Eigen::Vector2f(l.dist * sin(l.angle), l.dist * cos(l.angle)), Eigen::Vector2f(r_state.x, r_state.y), r_state.rz));
+        }
+    }
+
+    return peaks;
+}
+
+
+void SpecificWorker::draw_doors() {
+    // draw all doors
+    qInfo() << __FUNCTION__ << "---------- doors size:" << doors.size();
+    static std::vector<QGraphicsItem *> door_lines;
+    for (auto dp: door_lines) viewer->scene.removeItem(dp);
+    door_lines.clear();
+    for (const auto r: doors)
+    {
+        door_lines.push_back(viewer->scene.addLine(r.p1.x(), r.p1.y(), r.p2.x(), r.p2.y(), QPen(QColor("Magenta"), 100)));
+        door_lines.back()->setZValue(200);
+    }
+}
+
+void SpecificWorker::draw_peaks(std::vector<Eigen::Vector2f> peaks) {
+    // draw
+    static std::vector<QGraphicsItem*> door_points;
+    for(auto dp : door_points) viewer->scene.removeItem(dp);
+    door_points.clear();
+    for(const auto p: peaks)
+    {
+        door_points.push_back(viewer->scene.addRect(QRectF(p.x()-100, p.y()-100, 200, 200),
+                                                    QPen(QColor("Magenta")), QBrush(QColor("Magenta"))));
+        door_points.back()->setZValue(200);
+    }
+}
+void SpecificWorker::draw_door_midpoint(Door d) {
+    auto p = viewer->scene.addRect(QRectF(d.get_midpoint().x()-100, d.get_midpoint().y()-100, 200, 200), QPen(QColor("Blue"), 30), QBrush("Blue"));
+    p->setZValue(200);
 }
 
 /**************************************/
