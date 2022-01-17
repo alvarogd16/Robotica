@@ -91,7 +91,7 @@ private:
         {
             Eigen::ParametrizedLine<float, 2> r =  Eigen::ParametrizedLine<float, 2>(get_midpoint(), (p1-p2).unitOrthogonal());
             //qInfo() << __FUNCTION__ << r.pointAt(800.0).x() << r.pointAt(800.0).y();
-            return r.pointAt(1300.0);
+            return r.pointAt(1600.0);
         };
 
         // Valores negativos te dan el punto más cerca de ti
@@ -99,11 +99,15 @@ private:
         {
             Eigen::ParametrizedLine<float, 2> r =  Eigen::ParametrizedLine<float, 2>(get_midpoint(), (p1-p2).unitOrthogonal());
             //qInfo() << __FUNCTION__ << r.pointAt(800.0).x() << r.pointAt(800.0).y();
-            return r.pointAt(-600);
+            return r.pointAt(-700);
         };
 
-        // Guarda las habitaciones que conecta la puerta. Se inicializan a -1 al no estar visitadas en un principio.
+        // Guarda las habitaciones que conecta la puerta.
 		std::set<int> to_rooms;
+        void insertRoom(int room) {
+            to_rooms.insert(room);
+        }
+
         bool operator==(const Door& d){
             const int THRESHOLD = 500;
             return ((p1 - d.p1).norm() < THRESHOLD and (p2 - d.p2).norm() < THRESHOLD)
@@ -138,9 +142,14 @@ private:
     std::vector<Door> doors;
     Door selectedDoor;
 
+    float init_angle;
+
     void draw_doors();
     void draw_peaks(std::vector<Eigen::Vector2f> peaks);
     void draw_door_midpoint(Door d);
+
+    void print_all_doors();
+    void print_graph();
 };
 
 #endif

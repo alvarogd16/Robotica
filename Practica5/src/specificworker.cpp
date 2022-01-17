@@ -95,7 +95,6 @@ void SpecificWorker::compute()
     float advance = 0, rot = 0.5;
     int initial_num_doors  = doors.size();
     static int current_room = 0;
-    float init_angle = 0;
     switch(moveState)
     {
         case MoveStates_t::IDLE:{
@@ -113,7 +112,8 @@ void SpecificWorker::compute()
         case MoveStates_t::EXPLORE:{
             // Da vueltas en busca de puertas, si hace vuelta completa
             float current = (r_state.rz < 0) ? (2 * M_PI + r_state.rz) : r_state.rz;
-            if (fabs(current - init_angle) < (M_PI + 0.1) and fabs(current - init_angle) > (M_PI - 0.1))
+            bool vueltaEntera = fabs(current - init_angle) < (M_PI + 0.1) and fabs(current - init_angle) > (M_PI - 0.1);
+            if (vueltaEntera)
             {
                 try
                 { differentialrobot_proxy->setSpeedBase(0.0, 0.0); }
@@ -125,13 +125,13 @@ void SpecificWorker::compute()
 
 
             std::vector<Eigen::Vector2f> peaks = get_peaks(ldata, r_state);
-            qInfo() << __FUNCTION__ << "peaks " << peaks.size();
+            // qInfo() << __FUNCTION__ << "peaks " << peaks.size();
 
 
             // pairwise comparison of peaks to filter in doors
             for (auto &&c: iter::combinations(peaks, 2))
             {
-                qInfo() << __FUNCTION__ << "dist " << (c[0] - c[1]).norm();
+                // qInfo() << __FUNCTION__ << "dist " << (c[0] - c[1]).norm();
                 if ((c[0] - c[1]).norm() < 1100 and (c[0] - c[1]).norm() > 500)
                 {
                     // Crea la puerta con los
@@ -153,20 +153,24 @@ void SpecificWorker::compute()
             // Seleccionar una puerta
 
             std::vector<Door> doorsToGo;
-            auto gen = std::mt19937{std::random_device{}()};
             for(Door &d : doors) {
-                for(const auto &to_r : d.to_rooms)
-                    if(to_r == current_room)
-                        doorsToGo.push_back(d);
+                // for(const auto &to_r : d.to_rooms)
+                int to_r = *d.to_rooms.begin();
+                if(to_r == current_room)
+                    doorsToGo.push_back(d);
             }
 
             if(doorsToGo.empty()) {
                 qInfo() << "Todas las puertas visitadas";
+                print_all_doors();
+                print_graph();
+
                 moveState = MoveStates_t::IDLE;
             } else {
                 selectedDoor = doorsToGo.back();
 
                 qInfo() << "Room i'am " << *selectedDoor.to_rooms.begin();
+                qInfo() << "Room i'am2 " << current_room;
 
                 float aux_p1_x = selectedDoor.get_midpoint().x();
                 float aux_p1_y = selectedDoor.get_midpoint().y();
@@ -174,7 +178,7 @@ void SpecificWorker::compute()
                 qInfo() << "Puntos puerta" << selectedDoor.p1.x() << selectedDoor.p1.y() << selectedDoor.p2.x() << selectedDoor.p2.y();
                 qInfo() << "Punto medio" << aux_p1_x << aux_p1_y;
 
-                draw_door_midpoint(selectedDoor);
+                // draw_door_midpoint(selectedDoor);
 
                 target.point = QPointF(selectedDoor.get_point_closeDoor().x(), selectedDoor.get_point_closeDoor().y());
                 target.activo = true;
@@ -232,7 +236,16 @@ void SpecificWorker::compute()
 
                 target.point = QPointF(selectedDoor.get_external_midpoint().x(), selectedDoor.get_external_midpoint().y());
                 target.activo = true;
+
+                // Al pasar por la puerta actualizamos la habitación y actualizamos la puerta
                 current_room+=1;
+                for(Door &d : doors)
+                    if(d == selectedDoor)
+                        d.insertRoom(current_room);
+
+                // print_all_doors();
+                print_graph();
+
                 moveState = MoveStates_t::GOTO_CENTER;
             }
 
@@ -410,7 +423,7 @@ void SpecificWorker::draw_doors() {
     static std::vector<QGraphicsItem *> door_lines;
     for (auto dp: door_lines) viewer->scene.removeItem(dp);
     door_lines.clear();
-    for (const auto r: doors)
+    for (const auto &r: doors)
     {
         door_lines.push_back(viewer->scene.addLine(r.p1.x(), r.p1.y(), r.p2.x(), r.p2.y(), QPen(QColor("Magenta"), 100)));
         door_lines.back()->setZValue(200);
@@ -422,7 +435,7 @@ void SpecificWorker::draw_peaks(std::vector<Eigen::Vector2f> peaks) {
     static std::vector<QGraphicsItem*> door_points;
     for(auto dp : door_points) viewer->scene.removeItem(dp);
     door_points.clear();
-    for(const auto p: peaks)
+    for(const auto &p: peaks)
     {
         door_points.push_back(viewer->scene.addRect(QRectF(p.x()-100, p.y()-100, 200, 200),
                                                     QPen(QColor("Magenta")), QBrush(QColor("Magenta"))));
@@ -432,6 +445,27 @@ void SpecificWorker::draw_peaks(std::vector<Eigen::Vector2f> peaks) {
 void SpecificWorker::draw_door_midpoint(Door d) {
     auto p = viewer->scene.addRect(QRectF(d.get_midpoint().x()-100, d.get_midpoint().y()-100, 200, 200), QPen(QColor("Blue"), 30), QBrush("Blue"));
     p->setZValue(200);
+}
+
+void SpecificWorker::print_all_doors() {
+    for(Door &d : doors) {
+        std::cout << "Puerta con puntos, " << d.p1.x() << d.p1.y()<< d.p2.x() << d.p2.y() << std::endl;
+        for(int room : d.to_rooms) {
+            std::cout << "\tRoom: " << room << std::endl;
+        }
+    }
+}
+
+void SpecificWorker::print_graph() {
+    for(Door &d : doors) {
+        auto it = d.to_rooms.begin();
+        std::cout << *it << " -> ";
+    }
+
+    // La ultima puerta imprimo tambien la segunda puerta
+    Door d = doors.back();
+    auto it = ++d.to_rooms.begin();
+    std::cout << *it << std::endl;
 }
 
 /**************************************/

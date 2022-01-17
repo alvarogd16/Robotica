@@ -600,7 +600,7 @@ src/CMakeFiles/gotoxy.dir/gotoxy_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcoreversion.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/EWIEGA46WW/../../genericworker.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/EWIEGA46WW/../../config.h \
- /home/alumno/robocomp/classes/qlog/qlog.h \
+ /opt/robocomp/classes/qlog/qlog.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/config.h \
  /usr/include/boost/format.hpp /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp /usr/include/boost/config.hpp \
@@ -1155,7 +1155,7 @@ src/CMakeFiles/gotoxy.dir/gotoxy_autogen/mocs_compilation.cpp.o: \
  /usr/local/include/innermodel/innermodelimu.h \
  /usr/local/include/innermodel/innermodelpointcloud.h \
  /usr/local/include/innermodel/innermodeldisplay.h \
- /home/alumno/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
+ /opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsScene \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgraphicsscene.h \
@@ -1185,7 +1185,7 @@ src/CMakeFiles/gotoxy.dir/gotoxy_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsPolygonItem \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgraphicsitem.h \
- /home/alumno/robocomp/classes/grid2d/grid.h \
+ /opt/robocomp/classes/grid2d/grid.h \
  /usr/include/boost/functional/hash.hpp \
  /usr/include/boost/container_hash/hash.hpp \
  /usr/include/boost/container_hash/hash_fwd.hpp \
@@ -1451,5 +1451,5 @@ src/CMakeFiles/gotoxy.dir/gotoxy_autogen/mocs_compilation.cpp.o: \
  /usr/include/eigen3/Eigen/src/IterativeLinearSolvers/BiCGSTAB.h \
  /usr/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteLUT.h \
  /usr/include/eigen3/Eigen/src/IterativeLinearSolvers/IncompleteCholesky.h \
- /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/I3FNLAJYSS/moc_abstract_graphic_viewer.cpp \
- /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/I3FNLAJYSS/../../../../../../../robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h
+ /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/WU3NUE3SBC/moc_abstract_graphic_viewer.cpp \
+ /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/gotoxy_autogen/WU3NUE3SBC/../../../../../../../../../opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h

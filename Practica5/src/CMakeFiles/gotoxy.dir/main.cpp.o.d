@@ -988,12 +988,12 @@ src/CMakeFiles/gotoxy.dir/main.cpp.o: \
  /usr/include/langinfo.h /usr/include/nl_types.h /usr/include/Ice/UUID.h \
  /usr/include/IceUtil/UUID.h /usr/include/IceStorm/IceStorm.h \
  /usr/include/IceStorm/Metrics.h /usr/include/IceStorm/Config.h \
- /home/alumno/robocomp/classes/rapplication/rapplication.h \
+ /opt/robocomp/classes/rapplication/rapplication.h \
  /usr/include/IceUtil/IceUtil.h /usr/include/IceUtil/Functional.h \
  /usr/include/IceUtil/MutexPtrLock.h /usr/include/IceUtil/RecMutex.h \
- /home/alumno/robocomp/classes/sigwatch/sigwatch.h \
+ /opt/robocomp/classes/sigwatch/sigwatch.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject \
- /home/alumno/robocomp/classes/qlog/qlog.h \
+ /opt/robocomp/classes/qlog/qlog.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/config.h \
  /usr/include/boost/format.hpp /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp /usr/include/boost/config.hpp \
@@ -1352,7 +1352,7 @@ src/CMakeFiles/gotoxy.dir/main.cpp.o: \
  /usr/local/include/innermodel/innermodelimu.h \
  /usr/local/include/innermodel/innermodelpointcloud.h \
  /usr/local/include/innermodel/innermodeldisplay.h \
- /home/alumno/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
+ /opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsScene \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsView \
@@ -1367,7 +1367,7 @@ src/CMakeFiles/gotoxy.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsPolygonItem \
- /home/alumno/robocomp/classes/grid2d/grid.h \
+ /opt/robocomp/classes/grid2d/grid.h \
  /usr/include/boost/functional/hash.hpp \
  /usr/include/boost/container_hash/hash.hpp \
  /usr/include/boost/container_hash/hash_fwd.hpp \

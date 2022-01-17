@@ -18,7 +18,7 @@ src/CMakeFiles/gotoxy.dir/specificworker.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /home/alumno/robocomp/classes/qlog/qlog.h \
+ /opt/robocomp/classes/qlog/qlog.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/config.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCore \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCoreDepends \
@@ -1119,7 +1119,7 @@ src/CMakeFiles/gotoxy.dir/specificworker.cpp.o: \
  /usr/local/include/innermodel/innermodelimu.h \
  /usr/local/include/innermodel/innermodelpointcloud.h \
  /usr/local/include/innermodel/innermodeldisplay.h \
- /home/alumno/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
+ /opt/robocomp/classes/abstract_graphic_viewer/abstract_graphic_viewer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsScene \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgraphicsscene.h \
@@ -1149,7 +1149,7 @@ src/CMakeFiles/gotoxy.dir/specificworker.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsPolygonItem \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgraphicsitem.h \
- /home/alumno/robocomp/classes/grid2d/grid.h \
+ /opt/robocomp/classes/grid2d/grid.h \
  /usr/include/boost/functional/hash.hpp \
  /usr/include/boost/container_hash/hash.hpp \
  /usr/include/boost/container_hash/hash_fwd.hpp \
@@ -1422,4 +1422,4 @@ src/CMakeFiles/gotoxy.dir/specificworker.cpp.o: \
  /usr/local/include/cppitertools/internal/iterbase.hpp \
  /usr/local/include/cppitertools/internal/iteratoriterator.hpp \
  /usr/local/include/cppitertools/enumerate.hpp \
- /usr/local/include/cppitertools/combinations_with_replacement.hpp
+ /usr/local/include/cppitertools/combinations.hpp

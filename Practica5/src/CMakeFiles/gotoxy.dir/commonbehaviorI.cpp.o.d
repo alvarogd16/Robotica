@@ -282,7 +282,7 @@ src/CMakeFiles/gotoxy.dir/commonbehaviorI.cpp.o: \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/config.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/genericworker.h \
  /home/alumno/Documentos/G5-X1/Robotica/Practica5/src/config.h \
- /home/alumno/robocomp/classes/qlog/qlog.h \
+ /opt/robocomp/classes/qlog/qlog.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCore \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtCoreDepends \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \
